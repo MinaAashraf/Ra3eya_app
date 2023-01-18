@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "658509769924",
+    "project_id": "ra3eya-app",
+    "storage_bucket": "ra3eya-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658509769924:android:9baf2494e5e4eb0e486d91",
+        "android_client_info": {
+          "package_name": "com.mina.dev.ra3eya_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658509769924-7jfacvc3q6ah41up4keef4igosid7a3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIRFb1yRM4GZNJ7wg-tGl9vnTJ9dqN8u8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658509769924-7jfacvc3q6ah41up4keef4igosid7a3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_200"
+        android:fillViewport="true"
+        tools:context=".presentation.homeform.HomeFormFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/home_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/home_icon"
+                android:layout_margin="@dimen/screen_margin"
+                />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/home_name_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_50sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_icon"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/home_name_label"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/font_lg"
+                    android:layout_marginStart="@dimen/screen_margin"
+                    android:layout_marginEnd="@dimen/screen_margin"
+
+                    android:paddingStart="@dimen/field_Padding" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/family_number_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_name_field"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:hint="@string/family_no_label"
+                    android:inputType="number"
+                    android:layout_marginStart="@dimen/screen_margin"
+                    android:layout_marginEnd="@dimen/screen_margin"
+                    android:textSize="@dimen/font_lg"
+                    android:paddingStart="@dimen/field_Padding" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/adding_address_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/screen_margin"
+                android:backgroundTint="@color/black"
+                android:text="@string/adding_address_label"
+                android:textSize="@dimen/font_lg"
+                app:layout_constraintEnd_toEndOf="@+id/home_name_field"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/family_number_field" />
+
+            <TextView
+                android:id="@+id/address_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@id/adding_address_btn"
+                app:layout_constraintTop_toBottomOf="@id/adding_address_btn" />
+
+
+            <Button
+                android:id="@+id/save_home_btn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_margin="@dimen/screen_margin"
+                android:text="@string/save_label"
+                android:textSize="@dimen/font_xlg"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/adding_address_btn" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

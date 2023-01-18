@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="field_height">@dimen/_40sdp</dimen>
+    <dimen name="field_Padding">@dimen/_15sdp</dimen>
+    <dimen name="screen_margin">@dimen/_50sdp</dimen>
+
+
+    <dimen name="font_lg">@dimen/_14sdp</dimen>
+    <dimen name="font_xlg">@dimen/_16sdp</dimen>
+    <dimen name="font_md">@dimen/_12sdp</dimen>
+    <dimen name="font_sm">@dimen/_10sdp</dimen>
+
+
+</resources>
