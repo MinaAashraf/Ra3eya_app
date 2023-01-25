@@ -26,9 +26,15 @@ class HomeViewModel @Inject constructor(private val insertHomeUseCase: InsertHom
 
 
     var home: Home = Home()
-    fun insertHome(homeName: String, homeFamiliesNo:Int, churchId : String, addressLine:String) {
+    fun insertHome(
+        homeName: String,
+        homeFamiliesNo: Int,
+        churchId: String,
+        addressLine: String,
+        detailedAddress: String
+    ) {
         _loading.value = true
-        setHomeData(homeName,homeFamiliesNo,churchId,addressLine)
+        setHomeData(homeName, homeFamiliesNo, churchId, addressLine,detailedAddress)
         viewModelScope.launch(Dispatchers.IO) {
             insertHomeUseCase.execute(home).onSuccess {
                 withContext(Dispatchers.Main) {
@@ -36,9 +42,9 @@ class HomeViewModel @Inject constructor(private val insertHomeUseCase: InsertHom
                     _succeeded.value = Pair(true, it)
                 }
             }.onFailure {
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     _loading.value = false
-                    _succeeded.value = Pair(false, null)
+                    _succeeded.value = Pair(false, it.message)
                 }
 
             }
@@ -46,12 +52,19 @@ class HomeViewModel @Inject constructor(private val insertHomeUseCase: InsertHom
         }
     }
 
-   private fun setHomeData (homeName: String, homeFamiliesNo:Int, homeChurchId : String, homeAddressLine:String){
+    private fun setHomeData(
+        homeName: String,
+        homeFamiliesNo: Int,
+        homeChurchId: String,
+        homeAddressLine: String,
+        homeDetailedAddress : String
+    ) {
         home.apply {
             name = homeName
             familiesNo = homeFamiliesNo
             churchId = homeChurchId
             addressLine = homeAddressLine
+            detailedAddress = homeDetailedAddress
         }
     }
 

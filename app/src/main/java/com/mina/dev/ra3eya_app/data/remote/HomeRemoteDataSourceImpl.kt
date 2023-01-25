@@ -1,6 +1,7 @@
 package com.mina.dev.ra3eya_app.data.remote
 
 import android.content.Context
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.mina.dev.ra3eya_app.R
@@ -17,15 +18,11 @@ class HomeRemoteDataSourceImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : HomeRemoteDataSource {
 
-
     override suspend fun insertHome(home: Home): Result<String> {
         return withContext(Dispatchers.IO) {
             try {
                 fireStore.collection(context.getString(R.string.church_key)).document(home.churchId!!)
-                    .set(
-                        listOf(home),
-                        SetOptions.merge()
-                    ).await()
+                    .update(context.getString(R.string.homes_list_key),FieldValue.arrayUnion(home)).await()
                 Result.Success(context.getString(R.string.addingHome_successfully_msg))
             } catch (e: Exception) {
                 Result.Failure(e)

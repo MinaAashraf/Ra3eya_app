@@ -26,7 +26,8 @@ import javax.inject.Inject
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val sharedPref: SharedPreferences,
-    private val readAllChurchesUseCase: ReadAllChurchesUseCase
+    private val sharedPrefEditor: SharedPreferences.Editor,
+    private val readAllChurchesUseCase: ReadAllChurchesUseCase,
 ) : ViewModel() {
 
     private val _succeeded = MutableLiveData<Pair<Boolean, String?>?>()
@@ -71,13 +72,21 @@ class SignInViewModel @Inject constructor(
                 }
             }
                 .onFailure {
-                    Log.d("allChurchesErr",it.message.toString() )
+                    Log.d("allChurchesErr", it.message.toString())
                 }
         }
     }
 
     fun isAuthenticated(context: Context) =
         sharedPref.getBoolean(context.getString(R.string.authenticated_key), false)
+
+     fun saveState(context: Context) {
+        sharedPrefEditor.apply {
+            putBoolean(context.getString(R.string.authenticated_key), true)
+            putString(context.getString(R.string.church_id_key), church.id)
+            apply()
+        }
+    }
 
     fun clearLiveData() {
         _succeeded.value = null

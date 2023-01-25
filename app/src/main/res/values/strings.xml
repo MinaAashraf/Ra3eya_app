@@ -6,7 +6,7 @@
     <string name="church_name_hint">اسم الكنيسة</string>
     <string name="adding_church_title">اضــافـة كـنـيـسـة</string>
     <string name="password_label">الرقم السري</string>
-    <string name="adding_address_label">اضافة عنوان</string>
+    <string name="adding_address_label">اضافة عنوان علي الخريطة</string>
     <string name="save_label">حفظ</string>
     <string name="enter_label">دخول</string>
     <string name="church_name_error_msg">برجاء ادخال اسم الكنيسة</string>
@@ -30,9 +30,7 @@
     <string name="search_label">بحث ..</string>
 
 
-
-
-    <!-- google map dark style json -->
+  <!-- google map dark style json -->
     <string name="style_json">
   [
     {
@@ -239,4 +237,14 @@
   <string name="from_which_key">from_which_key</string>
     <string name="shared_preference_file_key">shared_pref_file_key</string>
   <string name="authenticated_key">authenticated</string>
+  <string name="homes_list_key">homes</string>
+  <string name="home_address_label">عنوان المنزل</string>
+  <string name="home_families_label">الاسر</string>
+  <string name="add_family_label">اضف اسرة</string>
+  <string name="homesListKey">homesList</string>
+  <string name="home_index_key">homeIndex</string>
+    <string name="home_key">home</string>
+    <string name="detailed_address_hint">العنوان بالتفصيل</string>
+  <string name="change_address_label">تغيير العنوان علي الخريطة</string>
+  <string name="detailed_address_err">برجاء ادخال العنوان بالتفصيل</string>
 </resources>

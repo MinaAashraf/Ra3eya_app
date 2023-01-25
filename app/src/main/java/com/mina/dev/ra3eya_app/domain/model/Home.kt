@@ -10,5 +10,6 @@ data class Home(
     var familiesNo: Int? = 0,
     var location: MyLocation? = null,
     var addressLine : String? = null,
+    var detailedAddress : String? = null,
     var families: List<String>? = null
 ) : Parcelable

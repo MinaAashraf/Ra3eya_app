@@ -10,18 +10,17 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.mina.dev.ra3eya_app.R
 import com.mina.dev.ra3eya_app.databinding.FragmentMapBinding
 import com.mina.dev.ra3eya_app.domain.model.Church
+import com.mina.dev.ra3eya_app.domain.model.Home
+import com.mina.dev.ra3eya_app.domain.model.HomesList
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MapFragment : Fragment() {
+class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
     private var gMap: GoogleMap? = null
     private lateinit var mapView: MapView
@@ -86,14 +85,16 @@ class MapFragment : Fragment() {
             .icon(BitmapDescriptorFactory.fromResource(R.drawable.church_marker))
         gMap?.let {
             it.addMarker(churchMarker)
-            it.animateCamera(CameraUpdateFactory.newLatLngZoom(churchMarker.position, 17f))
+            it.animateCamera(CameraUpdateFactory.newLatLngZoom(churchMarker.position, 20f))
         }
 
     }
 
+
+    private var markers: MutableList<Marker> = mutableListOf()
     private fun addHomesMarkers(church: Church) {
-        church.homes.let {
-            it.forEach { home ->
+        church.homes.let { homes ->
+            homes.forEachIndexed { index: Int, home: Home ->
                 home.location?.let { homeLocation ->
                     val homeMarker = MarkerOptions().position(
                         LatLng(
@@ -102,13 +103,15 @@ class MapFragment : Fragment() {
                         )
                     )
                         .title(home.name)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
-                    gMap!!.addMarker(homeMarker)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_marker))
+                    markers.add(gMap!!.addMarker(homeMarker)!!)
                 }
             }
         }
+        gMap!!.setOnMarkerClickListener(this)
 
     }
+
 
     private fun setUpFab() {
         binding.addingHomeFab.setOnClickListener {
@@ -133,7 +136,6 @@ class MapFragment : Fragment() {
     }
 
 
-
     override fun onStop() {
         super.onStop()
         mapView.onStop()
@@ -152,6 +154,19 @@ class MapFragment : Fragment() {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val clickedMarker = markers.filter { it.id == marker.id }[0]
+        val markerIndex = markers.indexOf(clickedMarker)
+
+        findNavController().navigate(
+            R.id.action_mapFragment_to_homeDetailsFragment,
+            Bundle().apply {
+                putParcelable(getString(R.string.home_key), church.homes[markerIndex])
+                putInt(getString(R.string.home_index_key), markerIndex)
+            })
+        return false
     }
 
 }

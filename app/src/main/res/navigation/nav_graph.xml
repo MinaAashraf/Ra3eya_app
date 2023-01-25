@@ -49,6 +49,9 @@
             app:popUpTo="@id/homeFormFragment"
             app:popUpToInclusive="true"
             />
+        <action
+            android:id="@+id/action_mapFragment_to_homeDetailsFragment"
+            app:destination="@id/homeDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapWithSearchFragment"
@@ -75,6 +78,22 @@
         <action
             android:id="@+id/action_homeFormFragment_to_mapFragment"
             app:destination="@id/mapFragment"
+            app:popUpTo="@id/nav_graph"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
             />
+    </fragment>
+    <fragment
+        android:id="@+id/familyFragment"
+        android:name="com.mina.dev.ra3eya_app.presentation.familyform.FamilyFragment"
+        android:label="fragment_family"
+        tools:layout="@layout/fragment_family" />
+    <fragment
+        android:id="@+id/homeDetailsFragment"
+        android:name="com.mina.dev.ra3eya_app.presentation.homedetails.HomeDetailsFragment"
+        android:label="HomeDetailsFragment" >
+        <action
+            android:id="@+id/action_homeDetailsFragment_to_familyFragment"
+            app:destination="@id/familyFragment" />
     </fragment>
 </navigation>

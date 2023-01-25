@@ -21,16 +21,15 @@
             >
 
             <ImageView
+                android:id="@+id/home_icon"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
+                android:layout_margin="@dimen/screen_margin"
                 android:scaleType="centerCrop"
                 android:src="@drawable/home_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/home_icon"
-                android:layout_margin="@dimen/screen_margin"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -48,13 +47,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/home_name_label"
-                    android:inputType="textPersonName"
-                    android:textSize="@dimen/font_lg"
                     android:layout_marginStart="@dimen/screen_margin"
                     android:layout_marginEnd="@dimen/screen_margin"
+                    android:hint="@string/home_name_label"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/field_Padding"
 
-                    android:paddingStart="@dimen/field_Padding" />
+                    android:textSize="@dimen/font_lg" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,13 +73,39 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/screen_margin"
                     android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/screen_margin"
                     android:hint="@string/family_no_label"
                     android:inputType="number"
+                    android:paddingStart="@dimen/field_Padding"
+                    android:textSize="@dimen/font_lg" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/detailed_address_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/family_number_field"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
                     android:layout_marginStart="@dimen/screen_margin"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/screen_margin"
-                    android:textSize="@dimen/font_lg"
-                    android:paddingStart="@dimen/field_Padding" />
+                    android:gravity="top"
+                    android:hint="@string/detailed_address_hint"
+                    android:inputType="textMultiLine"
+                    android:paddingStart="@dimen/field_Padding"
+                    android:textSize="@dimen/font_lg" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,38 +113,42 @@
             <Button
                 android:id="@+id/adding_address_btn"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_margin="@dimen/screen_margin"
                 android:backgroundTint="@color/black"
                 android:text="@string/adding_address_label"
                 android:textSize="@dimen/font_lg"
                 app:layout_constraintEnd_toEndOf="@+id/home_name_field"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/family_number_field" />
+
+                app:layout_constraintTop_toBottomOf="@+id/detailed_address_field" />
 
             <TextView
-                android:id="@+id/address_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:textColor="@color/red"
-                android:textSize="@dimen/_14ssp"
+                android:text="@string/add_home_address_msg"
+                app:layout_constraintTop_toBottomOf="@id/adding_address_btn"
                 app:layout_constraintStart_toStartOf="@id/adding_address_btn"
-                app:layout_constraintTop_toBottomOf="@id/adding_address_btn" />
+                android:textSize="@dimen/font_md"
+                android:textColor="@color/red"
+                android:id="@+id/address_err_txt"
+                android:visibility="gone"
+                />
 
 
             <Button
                 android:id="@+id/save_home_btn"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_40sdp"
-                android:layout_margin="@dimen/screen_margin"
+                android:layout_marginStart="@dimen/screen_margin"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/screen_margin"
                 android:text="@string/save_label"
                 android:textSize="@dimen/font_xlg"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/adding_address_btn" />
+                app:layout_constraintTop_toBottomOf="@id/address_err_txt" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -86,8 +86,9 @@ class SignInFragment : Fragment() {
                     findNavController().navigate(
                         R.id.action_signInFragment_to_mapFragment,
                         Bundle().apply {
-                             putParcelable("church",viewModel.church)
+                            putParcelable("church", viewModel.church)
                         })
+                    viewModel.saveState(requireContext())
                     viewModel.clearLiveData()
                 } else {
                     Snackbar.make(binding.root, it.second.toString(), Snackbar.LENGTH_SHORT).show()
@@ -106,9 +107,12 @@ class SignInFragment : Fragment() {
             }
         }
 
-        viewModel.allChurches.observe(viewLifecycleOwner){
+        viewModel.allChurches.observe(viewLifecycleOwner) {
             it?.let {
-                val churchesAdapter = ArrayAdapter(requireContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,it.map { it.name })
+                val churchesAdapter = ArrayAdapter(
+                    requireContext(),
+                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                    it.map { it.name })
                 binding.churchNameAutoCompleteTv.setAdapter(churchesAdapter)
             }
         }

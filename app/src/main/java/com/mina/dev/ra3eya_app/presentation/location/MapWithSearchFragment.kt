@@ -67,7 +67,7 @@ class MapWithSearchFragment : Fragment() {
                 val markerPosition = MyLocation(it.position.latitude, it.position.longitude)
                 if (fromWhichScreen == 0)
                     signUpViewModel.church.apply {
-                        location = markerPosition
+                        location = MyLocation(finalPosition.latitude,finalPosition.longitude)
                         addressLine = viewModel.getAddressFromLatLng(
                             requireContext(),
                             LatLng(markerPosition.latitude, markerPosition.longitude)
@@ -75,7 +75,7 @@ class MapWithSearchFragment : Fragment() {
                     }
                 else {
                     homeViewModel.home.apply {
-                        location = markerPosition
+                        location = MyLocation(finalPosition.latitude,finalPosition.longitude)
                         addressLine = viewModel.getAddressFromLatLng(
                             requireContext(),
                             LatLng(markerPosition.latitude, markerPosition.longitude)
@@ -116,8 +116,9 @@ class MapWithSearchFragment : Fragment() {
     private fun getCurrentLocation() {
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
             location?.let {
+                finalPosition = LatLng(it.latitude,it.longitude)
                 lastMarker?.let { marker -> marker.remove() }
-                addMapMarkerAtChurchPosition(LatLng(it.latitude, it.longitude))
+                addMapMarkerAtSelectedPosition(LatLng(it.latitude, it.longitude))
             }
         }.addOnFailureListener {
             Snackbar.make(binding.root, it.message.toString(), Snackbar.LENGTH_SHORT).show()
@@ -145,7 +146,11 @@ class MapWithSearchFragment : Fragment() {
                     if (it.isNotEmpty()) {
                         position = viewModel.getLatLongFromAddress(requireContext(), it)
                         lastMarker?.let { it.remove() }
-                        addMapMarkerAtChurchPosition(position!!)
+                        position?.let {
+                            finalPosition = it
+                            addMapMarkerAtSelectedPosition(it)
+                        }
+
                     }
                 }
                 binding.searchView.hideKeyboard()
@@ -161,16 +166,16 @@ class MapWithSearchFragment : Fragment() {
 
     private var lastMarker: Marker? = null
     private var fromWhichScreen: Int = 0
-    private fun addMapMarkerAtChurchPosition(churchPosition: LatLng) {
-        markerOptions = MarkerOptions().position(churchPosition).title("").draggable(true)
-            .icon(BitmapDescriptorFactory.fromResource(if (fromWhichScreen == 0) R.drawable.church_marker else R.drawable.home_icon))
+    private fun addMapMarkerAtSelectedPosition(selectedPosition: LatLng) {
+        markerOptions = MarkerOptions().position(selectedPosition).title("").draggable(true)
+            .icon(BitmapDescriptorFactory.fromResource(if (fromWhichScreen == 0) R.drawable.church_marker else R.drawable.home_marker))
         gMap?.let { googleMap ->
             lastMarker = googleMap.addMarker(
                 markerOptions!!
             )
             googleMap.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
-                    churchPosition,
+                    selectedPosition,
                     20f
                 )
             )
@@ -183,9 +188,12 @@ class MapWithSearchFragment : Fragment() {
         gMap?.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
             override fun onMarkerDrag(marker: Marker) {}
             override fun onMarkerDragEnd(marker: Marker) {
-                //addressLine = viewModel.getAddressFromLatLng(requireContext(), marker.position)
                 finalPosition = marker.position
-                binding.searchView.setQuery(addressLine, false)
+                try {
+                    addressLine = viewModel.getAddressFromLatLng(requireContext(), marker.position)
+                    binding.searchView.setQuery(addressLine, false)
+                } catch (e: Exception) {
+                }
             }
 
             override fun onMarkerDragStart(marker: Marker) {}
