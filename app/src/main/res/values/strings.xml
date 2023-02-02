@@ -250,6 +250,9 @@
   <string name="detailed_address_err">برجاء ادخال العنوان بالتفصيل</string>
   <string name="name_field_err">يجب ادخال الاسم</string>
     <string name="storage_folder_key">id_images</string>
+    <string name="family_name_hint">اسم العائلة</string>
+    <string name="floor_number_hint">رقم الطا بق</string>
+    <string name="family_save_label">حفظ</string>
 
 
     <array name="relations">

@@ -1,12 +1,14 @@
 package com.mina.dev.ra3eya_app.presentation.homedetails
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import android.view.Window
 import com.mina.dev.ra3eya_app.R
+import com.mina.dev.ra3eya_app.databinding.FragmentFamilyBinding
 import com.mina.dev.ra3eya_app.databinding.FragmentHomeDetailsBinding
 import com.mina.dev.ra3eya_app.domain.model.Home
 import com.mina.dev.ra3eya_app.presentation.utils.hide
@@ -43,8 +45,17 @@ class HomeDetailsFragment : Fragment() {
 
     private fun setClickListenerOnAddFamilyBtn() {
         binding.addFamilyBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_homeDetailsFragment_to_familyFragment)
+            //findNavController().navigate(R.id.action_homeDetailsFragment_to_familyFragment)
+             showAddingFamilyDialog()
         }
+    }
+
+    private fun showAddingFamilyDialog() {
+        val familyDialog = Dialog(requireContext())
+        familyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val dialogBinding = FragmentFamilyBinding.inflate(layoutInflater)
+        familyDialog.setContentView(dialogBinding.root)
+        familyDialog.show()
     }
 
 
