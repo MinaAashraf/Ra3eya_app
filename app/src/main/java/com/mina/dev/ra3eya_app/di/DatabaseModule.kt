@@ -3,6 +3,9 @@ package com.mina.dev.ra3eya_app.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.mina.dev.ra3eya_app.R
 import dagger.Module
 import dagger.Provides
@@ -18,6 +21,11 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun getFireStoreInstance(): FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    @Singleton
+    @Provides
+    fun getFirebaseStorageInstance(): StorageReference = FirebaseStorage.getInstance().reference
+
 
 
     @Singleton

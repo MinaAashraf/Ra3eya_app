@@ -12,5 +12,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white_200">#FAF5F5</color>
     <color name="white_100">#EDEDED</color>
+    <color name="grey">#eeeeee</color>
 
 </resources>

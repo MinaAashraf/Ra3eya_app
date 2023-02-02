@@ -13,6 +13,7 @@
     <string name="password_error_msg">برجاء ادخال الرقم السري</string>
     <string name="password_weak_msg">يجب الا يقل الرقم السري عن 8 ارقام</string>
     <string name="church_key">Church</string>
+    <string name="member_key">Members</string>
     <string name="addingChurch_successfully_msg">تم اضافة الكنيسة بنجاح</string>
     <string name="err_try_again_msg">حدثت مشكلة..برجاء المحاولة مرة اخري</string>
     <string name="church_id_key">churchId</string>
@@ -247,4 +248,16 @@
     <string name="detailed_address_hint">العنوان بالتفصيل</string>
   <string name="change_address_label">تغيير العنوان علي الخريطة</string>
   <string name="detailed_address_err">برجاء ادخال العنوان بالتفصيل</string>
+  <string name="name_field_err">يجب ادخال الاسم</string>
+    <string name="storage_folder_key">id_images</string>
+
+
+    <array name="relations">
+    <item>اب</item>
+    <item>ام</item>
+    <item>ابن</item>
+    <item>ابنة</item>
+  </array>
+
+
 </resources>
