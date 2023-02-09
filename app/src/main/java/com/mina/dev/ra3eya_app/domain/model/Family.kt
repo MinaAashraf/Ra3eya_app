@@ -1,7 +1,10 @@
 package com.mina.dev.ra3eya_app.domain.model
 
 data class Family(
-    private val churchId :String,
-    private val homeId :String,
-    private val persons : List<String>
+     val familyName :String = "",
+     val churchId :String = "",
+     val homeId :String = "",
+     val floorNum : Int = 0,
+     val familyAddress : String = "",
+     val persons : List<MemberNameId>? = null
 )

@@ -20,9 +20,9 @@
     <string name="family_no_label">عدد الأسر</string>
     <string name="home_name_label">اسم المنزل</string>
     <string name="member1_title">فرد 1</string>
-    <string name="name_label">الاسم</string>
-    <string name="relation_label">صلة القرابة</string>
-    <string name="id_image_upload">رفع صورة البطاقة</string>
+    <string name="name_label">الاسم*</string>
+    <string name="relation_label">صلة القرابة*</string>
+    <string name="id_image_upload">رفع صورة البطاقة*</string>
     <string name="save_and_add_another_label">حفظ و اضافة فرد اخر</string>
     <string name="finally_save_btn">حفظ نهائي</string>
     <string name="MAP_API_KEY">AIzaSyBywd_oKxRc5XE1TracUyUVnYWTSPiMi7M</string>
@@ -241,10 +241,13 @@
   <string name="homes_list_key">homes</string>
   <string name="home_address_label">عنوان المنزل</string>
   <string name="home_families_label">الاسر</string>
+  <string name="family_members_label">افراد الأسرة</string>
   <string name="add_family_label">اضف اسرة</string>
+  <string name="add_member_label">اضف شخصا للأسرة</string>
   <string name="homesListKey">homesList</string>
   <string name="home_index_key">homeIndex</string>
     <string name="home_key">home</string>
+    <string name="familyNameId_key">familyNameId_key</string>
     <string name="detailed_address_hint">العنوان بالتفصيل</string>
   <string name="change_address_label">تغيير العنوان علي الخريطة</string>
   <string name="detailed_address_err">برجاء ادخال العنوان بالتفصيل</string>
@@ -253,6 +256,30 @@
     <string name="family_name_hint">اسم العائلة</string>
     <string name="floor_number_hint">رقم الطا بق</string>
     <string name="family_save_label">حفظ</string>
+    <string name="families_collection_key">Families</string>
+    <string name="homes_collection_key">Homes</string>
+  <string name="family_adding_success_message">تم الاضافة بنجاح</string>
+  <string name="family_adding_failure_message">هناك مشكلة، حاول مرة اخري</string>
+  <string name="families_field_key">families</string>
+  <string name="homeId_key">homeId</string>
+  <string name="family_name_err">يجب ادخال اسم العائلة</string>
+  <string name="floor_num_err">يجب ادخال رقم الطابق</string>
+    <string name="id_image_label">صورة البطاقة</string>
+    <string name="spiritual_father_label">اب الاعتراف*</string>
+  <string name="persons_filed_key">persons</string>
+    <string name="collectionsKeys_key">collectionsKeys</string>
+    <string name="phone_number_label">رقم الموبايل*</string>
+  <string name="phone_field_err">يجب ادخال رقم الموبايل</string>
+  <string name="spiritual_father_filed_err">يجب ادخال اسم اب الاعتراف</string>
+  <string name="err_try_again_message">هناك مشكلة ، حاول مرة اخري</string>
+  <string name="job_field_hint">الوظيفة*</string>
+  <string name="family_name_key">familyName</string>
+  <string name="home_address_key">homeAddress</string>
+  <string name="address_label">العنوان</string>
+  <string name="job_label">الوظيفة</string>
+  <string name="home_info_label">بيانات المنزل</string>
+  <string name="family_info_label">بيانات العائلة</string>
+    <string name="not_exist_label">لا يوجد</string>
 
 
     <array name="relations">

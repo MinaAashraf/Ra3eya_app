@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(private val insertHomeUseCase: InsertHom
         homeName: String,
         homeFamiliesNo: Int,
         churchId: String,
-        addressLine: String,
+        addressLine: String = "",
         detailedAddress: String
     ) {
         _loading.value = true

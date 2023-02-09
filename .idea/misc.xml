@@ -4,26 +4,34 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/add_icon.xml" value="0.1645" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/background_rounded_white.xml" value="0.2805" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/background_searchview.xml" value="0.2385" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/circle.xml" value="0.19" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2095" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/ic_baseline_my_location_24.xml" value="0.2605" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/ic_baseline_phone_24.xml" value="0.334" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2275" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/rounded_background.xml" value="0.2275" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/stroke_background.xml" value="0.19" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/drawable/white_circle_background.xml" value="0.2655" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/font/changa.xml" value="0.25" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/activity_main.xml" value="0.29243266353142366" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/activity_map.xml" value="0.29243266353142366" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/family_adding_dialog.xml" value="0.33" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/family_adding_dialogue.xml" value="0.29243266353142366" />
-        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_family.xml" value="0.25" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/family_name_item.xml" value="0.33" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_family.xml" value="0.33" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_family_details.xml" value="0.33" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_home_details.xml" value="0.33" />
-        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_home_form.xml" value="0.25" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_home_form.xml" value="0.18" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_map.xml" value="0.14" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_map_with_search.xml" value="0.29243266353142366" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_member_details.xml" value="0.33" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_member_form.xml" value="0.2" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_search_places.xml" value="0.5" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_sign_in.xml" value="0.16" />
         <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/fragment_sign_up.xml" value="0.14" />
+        <entry key="..\:/Mina/Android Apps/app/src/main/res/layout/member_name_item.xml" value="0.30427350427350425" />
       </map>
     </option>
   </component>

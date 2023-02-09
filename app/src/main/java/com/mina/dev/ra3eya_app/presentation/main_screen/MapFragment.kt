@@ -15,7 +15,6 @@ import com.mina.dev.ra3eya_app.R
 import com.mina.dev.ra3eya_app.databinding.FragmentMapBinding
 import com.mina.dev.ra3eya_app.domain.model.Church
 import com.mina.dev.ra3eya_app.domain.model.Home
-import com.mina.dev.ra3eya_app.domain.model.HomesList
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,7 +33,9 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     ): View {
         setUpMap(savedInstanceState)
         setUpUi()
-        getChurchFromPreviousScreensIfExist()
+        readChurch()
+        readHomes()
+        observeHomesLiveData()
         return binding.root
     }
 
@@ -42,13 +43,28 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         setUpFab()
     }
 
-    private fun getChurchFromPreviousScreensIfExist() {
+    private fun readChurch() {
         arguments?.let {
             // if it get from sign in or sign up screens -> get church directly
             viewModel.setChurch(it.getParcelable<Church>("church") as Church)
         } ?: kotlin.run {
             // if it is already authenticated and have church id only -> read church from firebase using church saved id
             viewModel.readChurch(requireContext())
+        }
+    }
+
+    private fun readHomes() {
+        viewModel.readHomes(requireContext())
+    }
+
+    private val homes = mutableListOf<Home>()
+    private fun observeHomesLiveData() {
+        viewModel.homes.observe(viewLifecycleOwner) {
+            homes.clear()
+            homes.addAll(it)
+            gMap?.let {
+                addHomesMarkers()
+            }
         }
     }
 
@@ -71,7 +87,6 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
     private fun addMarkers(church: Church) {
         addChurchMarker(church)
-        addHomesMarkers(church)
     }
 
     private fun addChurchMarker(church: Church) {
@@ -92,23 +107,22 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
 
     private var markers: MutableList<Marker> = mutableListOf()
-    private fun addHomesMarkers(church: Church) {
-        church.homes.let { homes ->
-            homes.forEachIndexed { index: Int, home: Home ->
-                home.location?.let { homeLocation ->
-                    val homeMarker = MarkerOptions().position(
-                        LatLng(
-                            homeLocation.latitude,
-                            homeLocation.longitude
-                        )
+    private fun addHomesMarkers() {
+        homes.forEachIndexed { index: Int, home: Home ->
+            home.location?.let { homeLocation ->
+                val homeMarker = MarkerOptions().position(
+                    LatLng(
+                        homeLocation.latitude,
+                        homeLocation.longitude
                     )
-                        .title(home.name)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_marker))
-                    markers.add(gMap!!.addMarker(homeMarker)!!)
-                }
+                )
+                    .title(home.name)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_marker))
+                markers.add(gMap?.addMarker(homeMarker)!!)
             }
         }
-        gMap!!.setOnMarkerClickListener(this)
+
+        gMap?.setOnMarkerClickListener(this)
 
     }
 
@@ -157,14 +171,11 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val clickedMarker = markers.filter { it.id == marker.id }[0]
-        val markerIndex = markers.indexOf(clickedMarker)
-
+        val clickedHome = homes.filter { it.name == marker.title }[0]
         findNavController().navigate(
             R.id.action_mapFragment_to_homeDetailsFragment,
             Bundle().apply {
-                putParcelable(getString(R.string.home_key), church.homes[markerIndex])
-                putInt(getString(R.string.home_index_key), markerIndex)
+                putParcelable(getString(R.string.home_key), clickedHome)
             })
         return false
     }

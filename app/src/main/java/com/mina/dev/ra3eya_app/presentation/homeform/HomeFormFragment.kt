@@ -88,7 +88,7 @@ class HomeFormFragment : Fragment() {
                     homeName = homeName,
                     homeFamiliesNo = homeFamNum,
                     churchId = churchId,
-                    addressLine = churchAddressLine,
+                   // addressLine = churchAddressLine,
                     detailedAddress = homeDetailedAddress
                 )
                 observeModelData()

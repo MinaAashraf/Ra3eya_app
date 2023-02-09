@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".presentation.familyform.MemberFormFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_margin"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/screen_margin">
+
+            <TextView
+                android:id="@+id/member_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/member1_title"
+                android:textColor="@color/purple_500"
+                android:textSize="@dimen/font_xlg"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/id_image_label"
+                android:textColor="@color/purple_500"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/id_image"
+                app:layout_constraintTop_toBottomOf="@+id/member_title" />
+
+            <ImageView
+                android:id="@+id/id_image"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/stroke_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_label" />
+
+            <ImageView
+                android:id="@+id/add_image_icon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:alpha="0.4"
+                android:src="@drawable/gallery_icon"
+                app:layout_constraintBottom_toBottomOf="@id/id_image"
+                app:layout_constraintEnd_toEndOf="@id/id_image"
+                app:layout_constraintStart_toStartOf="@id/id_image"
+                app:layout_constraintTop_toTopOf="@id/id_image"
+
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/member_name_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_image">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name_label"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/field_Padding"
+                    android:textSize="@dimen/font_md"
+                    android:textStyle="bold" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/relation_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/member_name_field">
+
+                <AutoCompleteTextView
+                    android:id="@+id/relations_auto_complete_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/relation_label"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/font_md"
+
+                    android:textStyle="bold" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/relation_field">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_number_label"
+                    android:inputType="phone"
+                    android:paddingStart="@dimen/field_Padding"
+                    android:textSize="@dimen/font_md"
+                    android:textStyle="bold" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/job_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_field">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/job_field_hint"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/field_Padding"
+                    android:textSize="@dimen/font_md"
+                    android:textStyle="bold" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spiritual_father_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/job_field">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/spiritual_father_label"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/field_Padding"
+                    android:textSize="@dimen/font_md"
+                    android:textStyle="bold" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/save_member_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:text="@string/save_label"
+                android:textSize="@dimen/font_lg"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spiritual_father_field" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/save_member_btn"
+                app:layout_constraintEnd_toEndOf="@id/save_member_btn"
+                app:layout_constraintStart_toStartOf="@id/save_member_btn"
+                app:layout_constraintTop_toTopOf="@id/save_member_btn" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

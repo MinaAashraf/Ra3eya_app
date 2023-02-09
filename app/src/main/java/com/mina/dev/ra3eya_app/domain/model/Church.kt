@@ -10,5 +10,5 @@ data class Church (
      var id: String = "",
      var location: MyLocation? = null,
      var addressLine : String? = null,
-     var homes: MutableList<Home> = mutableListOf()
+ //    var homes: MutableList<Home> = mutableListOf()
 ) : Parcelable

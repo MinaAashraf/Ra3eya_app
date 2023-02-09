@@ -3,5 +3,6 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/cairo</item>
         <item>@font/changa</item>
+        <item>@font/jomhuria</item>
     </array>
 </resources>

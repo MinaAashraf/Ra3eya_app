@@ -2,9 +2,11 @@ package com.mina.dev.ra3eya_app.di
 
 import com.mina.dev.ra3eya_app.data.remote.*
 import com.mina.dev.ra3eya_app.data.repository.ChurchRepositoryImpl
+import com.mina.dev.ra3eya_app.data.repository.FamilyRepositoryImpl
 import com.mina.dev.ra3eya_app.data.repository.HomeRepositoryImpl
 import com.mina.dev.ra3eya_app.data.repository.MemberRepositoryImpl
 import com.mina.dev.ra3eya_app.domain.repository.ChurchRepository
+import com.mina.dev.ra3eya_app.domain.repository.FamilyRepository
 import com.mina.dev.ra3eya_app.domain.repository.HomeRepository
 import com.mina.dev.ra3eya_app.domain.repository.MemberRepository
 import dagger.Binds
@@ -40,9 +42,20 @@ abstract class DataModule {
     @Singleton
     abstract fun provideMemberRemoteDataSource(memberRemoteDataSource: MemberRemoteDataSourceImpl): MemberRemoteDataSource
 
+
+    @Binds
+    @Singleton
+    abstract fun provideFamilyRemoteDataSource(familyRemoteDataSourceImpl: FamilyRemoteDataSourceImpl): FamilyRemoteDataSource
+
+
     @Binds
     @Singleton
     abstract fun provideMemberRepo(memberRepository: MemberRepositoryImpl): MemberRepository
+
+
+    @Binds
+    @Singleton
+    abstract fun provideFamilyRepo(familyRepository: FamilyRepositoryImpl): FamilyRepository
 
 
 }

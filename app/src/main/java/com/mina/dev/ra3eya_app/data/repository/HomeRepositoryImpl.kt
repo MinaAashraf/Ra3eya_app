@@ -11,4 +11,8 @@ class HomeRepositoryImpl @Inject constructor(private val homeRemoteDataSource: H
     override suspend fun insertHome(home: Home): Result<String> {
         return homeRemoteDataSource.insertHome(home)
     }
+
+    override suspend fun readHomes(churchId: String): Result<List<Home>> = homeRemoteDataSource.readHomes(churchId)
+
+
 }

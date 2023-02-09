@@ -84,16 +84,24 @@
             />
     </fragment>
     <fragment
-        android:id="@+id/familyFragment"
-        android:name="com.mina.dev.ra3eya_app.presentation.familyform.FamilyFragment"
-        android:label="fragment_family"
-        tools:layout="@layout/fragment_family" />
+        android:id="@+id/memberFormFragment"
+        android:name="com.mina.dev.ra3eya_app.presentation.familyform.MemberFormFragment"
+        android:label="fragment_member_form"
+        tools:layout="@layout/fragment_member_form" />
     <fragment
         android:id="@+id/homeDetailsFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.homedetails.HomeDetailsFragment"
         android:label="HomeDetailsFragment" >
         <action
-            android:id="@+id/action_homeDetailsFragment_to_familyFragment"
-            app:destination="@id/familyFragment" />
+            android:id="@+id/action_homeDetailsFragment_to_familyDetailsFragment"
+            app:destination="@id/familyDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/familyDetailsFragment"
+        android:name="com.mina.dev.ra3eya_app.presentation.familydetails.FamilyDetailsFragment"
+        android:label="FamilyDetailsFragment" >
+        <action
+            android:id="@+id/action_familyDetailsFragment_to_memberFormFragment"
+            app:destination="@id/memberFormFragment" />
     </fragment>
 </navigation>

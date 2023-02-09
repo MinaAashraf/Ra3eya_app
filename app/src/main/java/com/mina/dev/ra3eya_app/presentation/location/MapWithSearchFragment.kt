@@ -76,12 +76,13 @@ class MapWithSearchFragment : Fragment() {
                 else {
                     homeViewModel.home.apply {
                         location = MyLocation(finalPosition.latitude,finalPosition.longitude)
-                        addressLine = viewModel.getAddressFromLatLng(
-                            requireContext(),
-                            LatLng(markerPosition.latitude, markerPosition.longitude)
-                        )
+                        try {
+                            addressLine = viewModel.getAddressFromLatLng(
+                                requireContext(),
+                                LatLng(markerPosition.latitude, markerPosition.longitude)
+                            )
+                        }catch (e:Exception){ }
                     }
-
                 }
                 /*findNavController().navigate(
                     if (fromWhichScreen == 0) R.id.action_mapWithSearchFragment_to_signUpFragment else R.id.action_mapWithSearchFragment_to_homeFormFragment,

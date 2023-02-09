@@ -9,6 +9,7 @@
     <dimen name="font_xlg">@dimen/_16sdp</dimen>
     <dimen name="font_md">@dimen/_12sdp</dimen>
     <dimen name="font_sm">@dimen/_10sdp</dimen>
+    <dimen name="font_very_sm">@dimen/_5sdp</dimen>
 
 
 </resources>
