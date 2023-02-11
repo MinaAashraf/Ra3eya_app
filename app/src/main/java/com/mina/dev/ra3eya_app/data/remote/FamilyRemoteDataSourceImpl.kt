@@ -1,6 +1,7 @@
 package com.mina.dev.ra3eya_app.data.remote
 
 import android.content.Context
+import android.util.Log
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.log
 
 class FamilyRemoteDataSourceImpl @Inject constructor(
     private val fireStore: FirebaseFirestore,
@@ -59,11 +61,11 @@ class FamilyRemoteDataSourceImpl @Inject constructor(
                         .document(familyId).get().await()
                 docSnapShot.toObject(Family::class.java)?.let {
                     Result.Success(it)
-                }
-                Result.Failure(Exception(context.getString(R.string.err_try_again_message)))
+                } ?: Result.Failure(Exception(context.getString(R.string.err_try_again_message)))
 
             } catch (e: FirebaseException) {
                 Result.Failure(e)
+
             }
         }
     }

@@ -72,7 +72,7 @@ class SignInFragment : Fragment() {
             validate = false
         }
         if (binding.passwordField.editText!!.text.length < 8) {
-            binding.passwordField.helperText = getString(R.string.password_error_msg)
+            binding.passwordField.helperText = getString(R.string.password_weak_msg)
             validate = false
         }
         return validate

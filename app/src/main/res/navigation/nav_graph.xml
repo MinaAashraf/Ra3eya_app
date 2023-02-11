@@ -103,5 +103,12 @@
         <action
             android:id="@+id/action_familyDetailsFragment_to_memberFormFragment"
             app:destination="@id/memberFormFragment" />
+        <action
+            android:id="@+id/action_familyDetailsFragment_to_memberDetailsFragment"
+            app:destination="@id/memberDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/memberDetailsFragment"
+        android:name="com.mina.dev.ra3eya_app.presentation.memberdetails.MemberDetailsFragment"
+        android:label="MemberDetailsFragment" />
 </navigation>

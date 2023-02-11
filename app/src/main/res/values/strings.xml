@@ -280,9 +280,10 @@
   <string name="home_info_label">بيانات المنزل</string>
   <string name="family_info_label">بيانات العائلة</string>
     <string name="not_exist_label">لا يوجد</string>
+  <string name="phone_num_label">رقم الموبايل</string>
 
 
-    <array name="relations">
+  <array name="relations">
     <item>اب</item>
     <item>ام</item>
     <item>ابن</item>

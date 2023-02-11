@@ -2,6 +2,7 @@ package com.mina.dev.ra3eya_app.presentation.familydetails
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.mina.dev.ra3eya_app.domain.model.MemberNameId
 import com.mina.dev.ra3eya_app.presentation.utils.hide
 import com.mina.dev.ra3eya_app.presentation.utils.show
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 @AndroidEntryPoint
 class FamilyDetailsFragment : Fragment(), MembersAdapter.ItemClickListener {
@@ -32,7 +34,7 @@ class FamilyDetailsFragment : Fragment(), MembersAdapter.ItemClickListener {
     ): View {
         getArgumentsData()
         setUi()
-        readFamily(requireContext(),familyId =  familyNameId.id, churchId = home.churchId!!)
+        readFamily(requireContext(), familyId = familyNameId.id, churchId = home.churchId!!)
         observeLiveData()
         return binding.root
     }
@@ -90,20 +92,16 @@ class FamilyDetailsFragment : Fragment(), MembersAdapter.ItemClickListener {
         viewModel.apply {
             family.observe(viewLifecycleOwner) {
                 it?.let {
-                    membersAdapter.submitList(it.persons)
                     binding.progressBar.hide()
+                    if (it.persons == null || it.persons.isEmpty())
+                        binding.notExistMemberLabel.show()
+                    else
+                        membersAdapter.submitList(it.persons)
                 }
             }
 
             success.observe(viewLifecycleOwner) {
                 it?.let {
-                    if (!it) {
-                        binding.notExistMemberLabel.show()
-                        binding.membersRecyclerView.hide()
-                    } else {
-                        binding.membersRecyclerView.show()
-                        binding.notExistMemberLabel.hide()
-                    }
                 }
             }
         }
@@ -111,7 +109,7 @@ class FamilyDetailsFragment : Fragment(), MembersAdapter.ItemClickListener {
 
     override fun onMemberItemClick(member: MemberNameId) {
         findNavController().navigate(
-            R.id.action_homeDetailsFragment_to_familyDetailsFragment,
+            R.id.action_familyDetailsFragment_to_memberDetailsFragment,
             Bundle().apply {
                 putParcelable(
                     getString(R.string.collectionsKeys_key),

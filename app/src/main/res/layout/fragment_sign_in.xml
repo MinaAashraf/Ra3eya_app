@@ -38,6 +38,7 @@
                 android:layout_marginTop="@dimen/_40sdp"
                 app:helperTextEnabled="true"
                 app:helperTextTextColor="@color/red"
+                android:focusable="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/church_icon">
@@ -46,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/church_name_hint"
+                    android:focusable="false"
                     android:inputType="textPersonName"
                     android:id="@+id/churchName_auto_complete_tv"
                     android:textSize="@dimen/font_lg"
@@ -79,7 +81,7 @@
             <Button
                 android:id="@+id/sign_in_btn"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:text="@string/enter_label"
                 android:textSize="@dimen/font_xlg"

@@ -42,7 +42,7 @@
                     android:gravity="start"
                     android:text="@{member.name}"
                     android:textColor="@color/purple_500"
-                    android:textSize="@dimen/font_md"
+                    android:textSize="@dimen/font_xlg"
                     app:layout_constraintEnd_toStartOf="@id/relation_txt"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:text="@{member.relation}"
-                    android:textSize="@dimen/font_sm"
+                    android:textSize="@dimen/font_lg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/member_name" />
 
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{member.familyName}"
-                    android:textSize="@dimen/font_sm"
+                    android:textSize="@dimen/font_lg"
                     app:layout_constraintStart_toStartOf="@id/member_name"
                     app:layout_constraintTop_toBottomOf="@id/member_name" />
 
@@ -83,7 +83,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/address_label"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/font_very_sm"
+                    android:textSize="@dimen/font_sm"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view" />
 
@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{member.address}"
-                    android:textSize="@dimen/font_sm"
+                    android:textSize="@dimen/font_lg"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/address_label" />
 
@@ -111,9 +111,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="رقم الموبايل"
+                    android:text="@string/phone_num_label"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/font_very_sm"
+                    android:textSize="@dimen/font_sm"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view2" />
 
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{member.phone}"
-                    android:textSize="@dimen/font_sm"
+                    android:textSize="@dimen/font_lg"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/member_phone_label" />
 
@@ -131,6 +131,7 @@
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_baseline_phone_24"
                     app:layout_constraintBottom_toBottomOf="@+id/member_phone_txt"
@@ -155,7 +156,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/job_label"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/font_very_sm"
+                    android:textSize="@dimen/font_sm"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view3" />
 
@@ -164,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{member.job}"
-                    android:textSize="@dimen/font_sm"
+                    android:textSize="@dimen/font_lg"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/job_label" />
 

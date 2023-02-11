@@ -171,6 +171,8 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
+        if (marker.title == church.name)
+            return false
         val clickedHome = homes.filter { it.name == marker.title }[0]
         findNavController().navigate(
             R.id.action_mapFragment_to_homeDetailsFragment,

@@ -42,7 +42,8 @@ class MemberRemoteDataSourceImpl @Inject constructor(
 
                 val memberNameId = MemberNameId(member.name, docSnapShot.id)
 
-                churchRef.document(member.churchId).collection(context.getString(R.string.families_collection_key))
+                churchRef.document(member.churchId)
+                    .collection(context.getString(R.string.families_collection_key))
                     .document(member.familyId)
                     .update(
                         context.getString(R.string.persons_filed_key),
@@ -67,8 +68,8 @@ class MemberRemoteDataSourceImpl @Inject constructor(
 
                 val member = docSnapShot.toObject(Member::class.java)
                 member?.let { Result.Success(it) }
+                    ?: Result.Failure(Exception(context.getString(R.string.err_try_again_msg)))
 
-                Result.Failure(Exception(context.getString(R.string.err_try_again_msg)))
             } catch (e: FirebaseException) {
                 Result.Failure(e)
             }
