@@ -1,14 +1,21 @@
 package com.mina.dev.ra3eya_app.domain.repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.mina.dev.ra3eya_app.domain.model.Family
 import com.mina.dev.ra3eya_app.domain.model.FamilyNameId
 import com.mina.dev.ra3eya_app.domain.util.Result
 
 interface FamilyRepository {
     suspend fun addFamily( family: Family): Result<FamilyNameId>
-    suspend fun readFamily(
+     fun readFamily(
         familyId: String,
         churchId: String
-    ) : Result<Family>
+    ) : LiveData<Family>
+
+     fun readFamilies (): LiveData<List<Family>>
+
+    suspend fun refreshAllFamilies (churchId : String)
+    suspend fun searchFamily (familyName : String) : List<LiveData<Family>>
+
 }

@@ -70,5 +70,27 @@ class FamilyRemoteDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun readAllFamilies(churchId: String): Result<List<Family>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val docSnapShot =
+                    fireStore.collection(context.getString(R.string.church_key)).document(churchId)
+                        .collection(context.getString(R.string.families_collection_key))
+                        .get().await()
+                val families = mutableListOf<Family>()
+                docSnapShot.documents.forEach {
+                    it.toObject(Family::class.java)?.let {family ->
+                        families.add(family)
+                    }
+                }
+                Result.Success(families)
+
+            } catch (e: FirebaseException) {
+                Result.Failure(e)
+
+            }
+        }
+    }
+
 
 }

@@ -6,8 +6,10 @@ import android.util.Log
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.mina.dev.ra3eya_app.R
+import com.mina.dev.ra3eya_app.domain.model.Family
 import com.mina.dev.ra3eya_app.domain.model.Member
 import com.mina.dev.ra3eya_app.domain.model.MemberNameId
 import com.mina.dev.ra3eya_app.domain.util.Result
@@ -75,4 +77,27 @@ class MemberRemoteDataSourceImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun readMembers(churchId: String): Result<List<Member>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val docSnapShot =
+                    fireStore.collection(context.getString(R.string.church_key)).document(churchId)
+                        .collection(context.getString(R.string.member_key))
+                        .get().await()
+                val members = mutableListOf<Member>()
+                docSnapShot.documents.forEach {
+                    it.toObject(Member::class.java)?.let { member ->
+                        members.add(member)
+                    }
+                }
+                Result.Success(members)
+
+            } catch (e: FirebaseException) {
+                Result.Failure(e)
+
+            }
+        }
+    }
+
 }

@@ -1,8 +1,11 @@
 package com.mina.dev.ra3eya_app.domain.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
+@Entity(tableName = "home_table")
 @Parcelize
 data class Home(
     var name: String? = "",
@@ -12,5 +15,7 @@ data class Home(
     var addressLine : String? = null,
     var detailedAddress : String? = null,
     var families: List<FamilyNameId>? = null,
-    var homeId : String = ""
+    var homeId : String = "",
+    @PrimaryKey var key : Int? = null
+
 ) : Parcelable

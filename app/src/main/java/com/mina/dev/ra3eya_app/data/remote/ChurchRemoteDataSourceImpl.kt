@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mina.dev.ra3eya_app.R
+import com.mina.dev.ra3eya_app.data.local.datasource.ChurchLocalDataSource
 import com.mina.dev.ra3eya_app.domain.model.Church
 import com.mina.dev.ra3eya_app.domain.model.ChurchCredentials
 import com.mina.dev.ra3eya_app.domain.model.Home
@@ -48,16 +49,13 @@ class ChurchRemoteDataSourceImpl @Inject constructor(
                     fireStore.collection("Church").get().await()
                 snapShot.documents.forEach {
                     it?.let { doc ->
-                        churches.add(doc.toObject(Church::class.java)!!)
-                        Log.d("churches objects", doc.toObject(Church::class.java).toString())
+                        val church = doc.toObject(Church::class.java)!!
+                        churches.add(church)
                     }
                 }
-                Log.d("churches objects",  churches.toString())
-
                 Result.Success(churches)
 
             } catch (e: Exception) {
-                Log.d("main errorrrrrr", e.message.toString())
                 Result.Failure(e)
             }
         }
@@ -93,5 +91,6 @@ class ChurchRemoteDataSourceImpl @Inject constructor(
             }
         }
     }
+
 
 }

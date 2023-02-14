@@ -9,7 +9,7 @@ import com.mina.dev.ra3eya_app.domain.repository.HomeRepository
 import com.mina.dev.ra3eya_app.domain.util.Result
 import javax.inject.Inject
 
-class ReadHomesUseCase @Inject constructor(private val homeRepository: HomeRepository) {
-    fun execute(): LiveData<List<Home>> =
-        homeRepository.readHomes()
+class RefreshHomesUseCase @Inject constructor(private val homeRepository: HomeRepository) {
+    suspend fun execute(churchId: String): Result<List<Home>> =
+        homeRepository.refreshHomes(churchId)
 }

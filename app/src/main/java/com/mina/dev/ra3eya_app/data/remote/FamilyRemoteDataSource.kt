@@ -8,4 +8,5 @@ import com.mina.dev.ra3eya_app.domain.util.Result
 interface FamilyRemoteDataSource {
     suspend fun addFamily(context: Context, family: Family) : Result<FamilyNameId>
     suspend fun readFamily (context: Context, familyId :String , churchId : String) : Result<Family>
+    suspend fun readAllFamilies (churchId: String) : Result<List<Family>>
 }

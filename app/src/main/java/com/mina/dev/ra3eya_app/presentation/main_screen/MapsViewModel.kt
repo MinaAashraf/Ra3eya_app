@@ -8,9 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mina.dev.ra3eya_app.R
 import com.mina.dev.ra3eya_app.domain.model.Church
+import com.mina.dev.ra3eya_app.domain.model.Family
 import com.mina.dev.ra3eya_app.domain.model.Home
-import com.mina.dev.ra3eya_app.domain.usecases.ReadChurchUseCase
-import com.mina.dev.ra3eya_app.domain.usecases.ReadHomesUseCase
+import com.mina.dev.ra3eya_app.domain.model.Member
+import com.mina.dev.ra3eya_app.domain.usecases.*
 import com.mina.dev.ra3eya_app.domain.util.onFailure
 import com.mina.dev.ra3eya_app.domain.util.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,10 +24,16 @@ import javax.inject.Inject
 @HiltViewModel
 class MapsViewModel @Inject constructor(
     private val readChurchUseCase: ReadChurchUseCase,
-    private val readHomesUseCase: ReadHomesUseCase,
+    readHomesUseCase: ReadHomesUseCase,
+    private val refreshHomesUseCase: RefreshHomesUseCase,
+    private val refreshMembersUseCase: RefreshMembersUseCase,
+    readAllMembersUseCase: ReadAllMembersUseCase,
+    private val refreshFamiliesUseCase: RefreshFamiliesUseCase,
+    readFamiliesUseCase: ReadFamiliesUseCase,
     private val sharedPreferences: SharedPreferences
 ) :
     ViewModel() {
+
 
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
@@ -34,9 +41,12 @@ class MapsViewModel @Inject constructor(
     private val _churchData: MutableLiveData<Church> = MutableLiveData()
     val churchData: LiveData<Church> = _churchData
 
-    private val _homes: MutableLiveData<List<Home>> = MutableLiveData()
-    val homes: LiveData<List<Home>> = _homes
-
+    var homes: LiveData<List<Home>> = readHomesUseCase.execute()
+    var families: LiveData<List<Family>> = readFamiliesUseCase.execute()
+    var members: LiveData<List<Member>> = readAllMembersUseCase.execute()
+    /* var families: LiveData<List<Family>> = .execute()
+     var members: LiveData<List<Home>> = readHomesUseCase.execute()
+ */
 
     fun readChurch(context: Context) {
         val churchId = getStoredChurchId(context)
@@ -54,13 +64,12 @@ class MapsViewModel @Inject constructor(
 
     }
 
-    fun readHomes(context: Context) {
+    fun refreshHomes(context: Context) {
         _loading.value = true
         val churchId = getStoredChurchId(context)
         viewModelScope.launch(Dispatchers.IO) {
-            readHomesUseCase.execute(churchId!!).onSuccess {
+            refreshHomesUseCase.execute(churchId!!).onSuccess {
                 withContext(Dispatchers.Main) {
-                    _homes.value = it
                     _loading.value = false
                 }
             }.onFailure {
@@ -68,6 +77,20 @@ class MapsViewModel @Inject constructor(
             }
         }
 
+    }
+
+    fun refreshFamilies(context: Context) {
+        val churchId = getStoredChurchId(context)
+        viewModelScope.launch(Dispatchers.IO) {
+            refreshFamiliesUseCase.execute(churchId!!)
+        }
+    }
+
+    fun refreshMembers(context: Context) {
+        val churchId = getStoredChurchId(context)
+        viewModelScope.launch(Dispatchers.IO) {
+            refreshMembersUseCase.execute(churchId!!)
+        }
     }
 
     fun setChurch(church: Church) {

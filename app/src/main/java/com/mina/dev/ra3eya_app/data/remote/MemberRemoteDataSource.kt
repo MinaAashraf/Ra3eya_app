@@ -9,4 +9,6 @@ interface MemberRemoteDataSource {
 
    suspend fun addMember(uri: Uri?,member:Member) : Result<MemberNameId>
    suspend fun readMember (memberId : String, churchId : String) : Result<Member>
+   suspend fun readMembers (churchId : String) : Result<List<Member>>
+
 }

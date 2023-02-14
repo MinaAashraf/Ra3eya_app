@@ -11,6 +11,7 @@ import com.mina.dev.ra3eya_app.R
 import com.mina.dev.ra3eya_app.domain.model.Church
 import com.mina.dev.ra3eya_app.domain.model.ChurchCredentials
 import com.mina.dev.ra3eya_app.domain.model.Family
+import com.mina.dev.ra3eya_app.domain.repository.ChurchRepository
 import com.mina.dev.ra3eya_app.domain.usecases.ReadAllChurchesUseCase
 import com.mina.dev.ra3eya_app.domain.usecases.SignInUseCase
 import com.mina.dev.ra3eya_app.domain.util.onFailure
@@ -36,51 +37,58 @@ class SignInViewModel @Inject constructor(
     private val _loading = MutableLiveData<Boolean?>()
     val loading: LiveData<Boolean?> = _loading
 
-    private val _allChurches = MutableLiveData<List<Church>>()
-    val allChurches: LiveData<List<Church>> = _allChurches
+    val allChurches = readAllChurchesUseCase.execute()
 
     var church = Church()
 
-    init {
-        readAllChurches()
-    }
 
     fun signIn(churchCredentials: ChurchCredentials) {
         _loading.postValue(true)
-        viewModelScope.launch {
-            signInUseCase.execute(churchCredentials).onSuccess {
-                church = it
-                withContext(Dispatchers.Main) {
-                    _succeeded.postValue(Pair(true, "تم الدخول بنجاح"))
-                    _loading.postValue(false)
-                }
+        signInUseCase.execute(churchCredentials).value?.let {
+            church = it
+            _succeeded.postValue(Pair(true, "تم الدخول بنجاح"))
+            _loading.postValue(false)
 
-            }.onFailure {
-                withContext(Dispatchers.Main) {
-                    _succeeded.postValue(Pair(false, it.message.toString()))
-                    _loading.postValue(false)
-                }
+        } ?: kotlin.run {
+            _succeeded.postValue(Pair(false, "تأكد من الرقم السري"))
+            _loading.postValue(false)
+        }
+
+    }
+    /*viewModelScope.launch {
+        signInUseCase.execute(churchCredentials).onSuccess {
+            church = it
+            withContext(Dispatchers.Main) {
+                _succeeded.postValue(Pair(true, "تم الدخول بنجاح"))
+                _loading.postValue(false)
+            }
+
+        }.onFailure {
+            withContext(Dispatchers.Main) {
+                _succeeded.postValue(Pair(false, it.message.toString()))
+                _loading.postValue(false)
             }
         }
-    }
+    }*/
 
-    private fun readAllChurches() {
-        viewModelScope.launch {
-            readAllChurchesUseCase.execute().onSuccess {
-                withContext(Dispatchers.Main) {
-                    _allChurches.value = it
-                }
-            }
-                .onFailure {
-                    Log.d("allChurchesErr", it.message.toString())
-                }
-        }
-    }
+
+/*  private fun readAllChurches() {
+      viewModelScope.launch {
+          readAllChurchesUseCase.execute().onSuccess {
+              withContext(Dispatchers.Main) {
+                  _allChurches.value = it
+              }
+          }
+              .onFailure {
+                  Log.d("allChurchesErr", it.message.toString())
+              }
+      }
+  }*/
 
     fun isAuthenticated(context: Context) =
         sharedPref.getBoolean(context.getString(R.string.authenticated_key), false)
 
-     fun saveState(context: Context) {
+    fun saveState(context: Context) {
         sharedPrefEditor.apply {
             putBoolean(context.getString(R.string.authenticated_key), true)
             putString(context.getString(R.string.church_id_key), church.id)

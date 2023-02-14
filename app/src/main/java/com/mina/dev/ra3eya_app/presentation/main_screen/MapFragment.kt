@@ -34,7 +34,9 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         setUpMap(savedInstanceState)
         setUpUi()
         readChurch()
-        readHomes()
+        refreshHomes()
+        refreshFamilies()
+        refreshMembers()
         observeHomesLiveData()
         return binding.root
     }
@@ -53,9 +55,17 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         }
     }
 
-    private fun readHomes() {
-        viewModel.readHomes(requireContext())
+
+    private fun refreshHomes() {
+        viewModel.refreshHomes(requireContext())
     }
+    private fun refreshMembers() {
+        viewModel.refreshMembers(requireContext())
+    }
+    private fun refreshFamilies (){
+        viewModel.refreshFamilies(requireContext())
+    }
+
 
     private val homes = mutableListOf<Home>()
     private fun observeHomesLiveData() {

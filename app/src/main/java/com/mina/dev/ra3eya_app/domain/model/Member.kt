@@ -1,5 +1,9 @@
 package com.mina.dev.ra3eya_app.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "member_table")
 data class Member(
     var idImage: String? = null,
     val name: String = "",
@@ -12,4 +16,5 @@ data class Member(
     var homeId : String = "",
     var familyId : String = "",
     var churchId : String = "",
-    )
+    @PrimaryKey var key : Int? = null
+)
