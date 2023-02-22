@@ -8,14 +8,14 @@ import com.mina.dev.ra3eya_app.domain.util.Result
 @Dao
 interface MemberDao {
 
-    @Query("Select * from member_table where churchId =:churchId and familyId = :familyId")
-    fun readMembersOfFamily(churchId: String, familyId: String): List<LiveData<Member>>
+    @Query("Select * from member_table where familyName = :familyName and homeId = :homeId")
+    fun readMembersOfFamily(familyName: String, homeId:String): LiveData<List<Member>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMember(member: Member)
 
     @Query("select * from member_table where homeId like :memberNameSubString and churchId = :churchId")
-    fun searchMember(memberNameSubString: String, churchId: String): List<LiveData<Member>>
+    fun searchMember(memberNameSubString: String, churchId: String): LiveData<List<Member>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMembers(members: List<Member>)

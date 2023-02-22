@@ -1,5 +1,6 @@
 package com.mina.dev.ra3eya_app.di
 
+import com.mina.dev.ra3eya_app.data.local.datasource.*
 import com.mina.dev.ra3eya_app.data.remote.*
 import com.mina.dev.ra3eya_app.data.repository.ChurchRepositoryImpl
 import com.mina.dev.ra3eya_app.data.repository.FamilyRepositoryImpl
@@ -24,14 +25,14 @@ abstract class DataModule {
     abstract fun provideChurchRepo(churchRepository: ChurchRepositoryImpl): ChurchRepository
 
 
-    @Binds
-    @Singleton
-    abstract fun provideChurchRemoteDataSource(churchRemoteDataSource: ChurchRemoteDataSourceImpl): ChurchRemoteDataSource
-
 
     @Binds
     @Singleton
     abstract fun provideHomeRepo(homeRepository: HomeRepositoryImpl): HomeRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideChurchRemoteDataSource(churchRemoteDataSource: ChurchRemoteDataSourceImpl): ChurchRemoteDataSource
 
 
     @Binds
@@ -56,6 +57,25 @@ abstract class DataModule {
     @Binds
     @Singleton
     abstract fun provideFamilyRepo(familyRepository: FamilyRepositoryImpl): FamilyRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideChurchLocalDataSource(churchLocalDataSource: ChurchLocalDataSourceImpl): ChurchLocalDataSource
+
+
+    @Binds
+    @Singleton
+    abstract fun provideHomeLocalDataSource(homeLocalDataSource: HomeLocalDataSourceImpl): HomeLocalDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideMemberLocalDataSource(memberLocalDataSource: MemberLocalDataSourceImpl): MemberLocalDataSource
+
+
+    @Binds
+    @Singleton
+    abstract fun provideFamilyLocalDataSource(familyLocalDataSource: FamilyLocalDataSourceImpl): FamilyLocalDataSource
+
 
 
 }

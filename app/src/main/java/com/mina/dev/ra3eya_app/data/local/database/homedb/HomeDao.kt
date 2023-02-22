@@ -28,7 +28,7 @@ interface HomeDao {
 
 
     @Query("select * from home_table where homeId like :homeNameSubString and churchId = :churchId")
-    fun searchHome(homeNameSubString: String, churchId : String) : List<LiveData<Home>>
+    fun searchHome(homeNameSubString: String, churchId : String) : LiveData<List<Home>>
 
 
 }

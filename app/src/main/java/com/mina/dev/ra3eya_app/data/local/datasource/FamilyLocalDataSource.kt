@@ -5,13 +5,14 @@ import com.mina.dev.ra3eya_app.domain.model.Family
 
 interface FamilyLocalDataSource {
 
-    fun readAllFamiliesOfHome(churchId: String, homeId: String)
+    fun readAllFamiliesOfHome(homeId:String) : LiveData<List<Family>>
     suspend fun insertFamily(family: Family)
     suspend fun insertAllFamilies(families: List<Family>)
 
-    fun readFamily (familyId : String) : LiveData<Family>
+    fun readFamily (familyId : String,homeId: String) : LiveData<Family>
     fun readFamilies () : LiveData<List<Family>>
-    fun searchFamily(familyNameSubString: String) : List<LiveData<Family>>
-    fun clearAllFamilies ()
+    fun searchFamily(familyNameSubString: String) : LiveData<List<Family>>
+
+    suspend fun clearAllFamilies ()
 
 }

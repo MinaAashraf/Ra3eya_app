@@ -248,6 +248,8 @@
   <string name="home_index_key">homeIndex</string>
     <string name="home_key">home</string>
     <string name="familyNameId_key">familyNameId_key</string>
+    <string name="family_key">family_key</string>
+    <string name="memberName_key">memberName_key</string>
     <string name="detailed_address_hint">العنوان بالتفصيل</string>
   <string name="change_address_label">تغيير العنوان علي الخريطة</string>
   <string name="detailed_address_err">برجاء ادخال العنوان بالتفصيل</string>
@@ -266,6 +268,7 @@
   <string name="floor_num_err">يجب ادخال رقم الطابق</string>
     <string name="id_image_label">صورة البطاقة</string>
     <string name="spiritual_father_label">اب الاعتراف*</string>
+    <string name="spiritual_father_label2">اب الاعتراف</string>
   <string name="persons_filed_key">persons</string>
     <string name="collectionsKeys_key">collectionsKeys</string>
     <string name="phone_number_label">رقم الموبايل*</string>
@@ -281,6 +284,10 @@
   <string name="family_info_label">بيانات العائلة</string>
     <string name="not_exist_label">لا يوجد</string>
   <string name="phone_num_label">رقم الموبايل</string>
+    <string name="sign_in_successfully_message">تم الدخول بنجاح</string>
+    <string name="search_err_message">ادخل كلمة البحث</string>
+  <string name="family_label">عائلة</string>
+  <string name="home_label">منزل</string>
 
 
   <array name="relations">

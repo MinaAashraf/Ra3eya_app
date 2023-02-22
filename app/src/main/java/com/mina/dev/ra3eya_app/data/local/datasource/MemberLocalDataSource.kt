@@ -7,15 +7,16 @@ import androidx.room.Query
 import com.mina.dev.ra3eya_app.domain.model.Member
 
 interface MemberLocalDataSource {
-    fun readMembersOfFamily(churchId: String, familyId: String): List<LiveData<Member>>
 
     fun insertMember(member: Member)
 
-    fun searchMember(memberNameSubString: String, churchId: String): List<LiveData<Member>>
+    fun searchMember(memberNameSubString: String, churchId: String): LiveData<List<Member>>
 
-    fun readMember(memberName: String,homeId:String) :LiveData<Member>
+    fun readMember(memberName: String, homeId: String): LiveData<Member>
 
-    fun readMembers() :LiveData<List<Member>>
+    fun readMembers(): LiveData<List<Member>>
+
+    fun readMemberOfFamily(familyName: String, homeId:String): LiveData<List<Member>>
 
     fun clearMembers()
 

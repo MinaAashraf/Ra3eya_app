@@ -8,8 +8,6 @@ import javax.inject.Inject
 class MemberLocalDataSourceImpl @Inject constructor(private var memberDao: MemberDao) :
     MemberLocalDataSource {
 
-    override fun readMembersOfFamily(churchId: String, familyId: String): List<LiveData<Member>> =
-        memberDao.readMembersOfFamily(churchId, familyId)
 
     override fun insertMember(member: Member) {
         memberDao.insertMember(member)
@@ -18,7 +16,7 @@ class MemberLocalDataSourceImpl @Inject constructor(private var memberDao: Membe
     override fun searchMember(
         memberNameSubString: String,
         churchId: String
-    ): List<LiveData<Member>> = memberDao.searchMember(memberNameSubString, churchId)
+    ): LiveData<List<Member>> = memberDao.searchMember(memberNameSubString, churchId)
 
 
     override fun readMember(memberName: String, homeId: String): LiveData<Member> {
@@ -26,6 +24,10 @@ class MemberLocalDataSourceImpl @Inject constructor(private var memberDao: Membe
     }
 
     override fun readMembers(): LiveData<List<Member>> = memberDao.readMembers()
+
+    override fun readMemberOfFamily(familyName: String, homeId:String): LiveData<List<Member>> {
+        return memberDao.readMembersOfFamily(familyName,homeId)
+    }
 
     override fun clearMembers() {
         memberDao.clearMembers()

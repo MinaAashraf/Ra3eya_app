@@ -10,7 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ScrollView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.allViews
+import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.mina.dev.ra3eya_app.R
@@ -18,6 +22,7 @@ import com.mina.dev.ra3eya_app.databinding.FragmentMemberFormBinding
 import com.mina.dev.ra3eya_app.domain.model.CollectionsKeys
 import com.mina.dev.ra3eya_app.domain.model.Member
 import com.mina.dev.ra3eya_app.presentation.utils.hide
+import com.mina.dev.ra3eya_app.presentation.utils.hideKeyboard
 import com.mina.dev.ra3eya_app.presentation.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,6 +44,7 @@ class MemberFormFragment : Fragment() {
         getCollectionSKeys()
         setUi()
         observeLiveData()
+        handleSoftKeyboard()
         return binding.root
     }
 
@@ -46,8 +52,8 @@ class MemberFormFragment : Fragment() {
         arguments?.let {
             collectionsKeysObj =
                 it.getParcelable<CollectionsKeys>(getString(R.string.collectionsKeys_key)) as CollectionsKeys
-            homeAddress = it.getString(getString(R.string.home_address_key),"")
-            familyName = it.getString(getString(R.string.family_name_key),"")
+            homeAddress = it.getString(getString(R.string.home_address_key), "")
+            familyName = it.getString(getString(R.string.family_name_key), "")
 
         }
     }
@@ -69,7 +75,6 @@ class MemberFormFragment : Fragment() {
                     phone = binding.phoneField.editText!!.text.toString(),
                     familyName = familyName,
                     address = homeAddress,
-                    familyId = collectionsKeysObj.familyKey!!,
                     churchId = collectionsKeysObj.churchKey!!,
                     homeId = collectionsKeysObj.homeKey!!,
                 )
@@ -96,7 +101,9 @@ class MemberFormFragment : Fragment() {
                     getString(R.string.family_adding_success_message),
                     Snackbar.LENGTH_LONG
                 ).show()
+
                 binding.memberTitle.text = "فرد $memberCounter"
+                binding.progressBar.hide()
             }
         }
     }
@@ -157,6 +164,15 @@ class MemberFormFragment : Fragment() {
             listOf("ابنة", "ابن", "ام", "اب")
         )
         binding.relationsAutoCompleteTv.setAdapter(relationsAdapter)
+    }
+
+    private fun handleSoftKeyboard() {
+        binding.parentLayout.setOnClickListener {
+            (it as ConstraintLayout).children.forEach {
+                it.hideKeyboard()
+            }
+           // binding.memberNameField.editText!!.hideKeyboard()
+        }
     }
 
 

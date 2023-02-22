@@ -8,9 +8,10 @@ import com.mina.dev.ra3eya_app.domain.model.MemberNameId
 import com.mina.dev.ra3eya_app.domain.util.Result
 
 interface MemberRepository {
-   suspend fun addMember (uri:Uri?, member:Member) : Result<MemberNameId>
-   suspend fun readMember (memberId : String, churchId : String) : Result<Member>
-   suspend fun refreshMembers (churchId:String)
-   fun readMembers () : LiveData<List<Member>>
+    suspend fun addMember(uri: Uri?, member: Member): Result<Member>
+    fun readMember(memberName: String, homeId: String): LiveData<Member>
+    suspend fun refreshMembers(churchId: String)
+    fun readMembers(): LiveData<List<Member>>
+    fun readMembersOfFamily(familyName: String, homeId:String) : LiveData<List<Member>>
 
 }

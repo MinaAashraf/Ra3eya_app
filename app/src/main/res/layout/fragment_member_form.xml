@@ -14,11 +14,14 @@
         tools:context=".presentation.familyform.MemberFormFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parent_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_margin"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/screen_margin">
+            android:paddingStart="@dimen/screen_margin"
+            android:paddingEnd="@dimen/screen_margin"
+
+            >
 
             <TextView
                 android:id="@+id/member_title"
@@ -159,9 +162,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spiritual_father_field"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -190,9 +190,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
                 android:text="@string/save_label"
                 android:textSize="@dimen/font_lg"
-                android:layout_marginBottom="@dimen/_20sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

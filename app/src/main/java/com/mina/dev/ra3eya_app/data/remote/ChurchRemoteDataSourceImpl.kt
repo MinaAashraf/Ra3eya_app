@@ -80,7 +80,7 @@ class ChurchRemoteDataSourceImpl @Inject constructor(
         {
             try {
                 val docSnapShot = fireStore.collection(context.getString(R.string.church_key))
-                    .document(church.name).get()
+                    .document(church.id).get()
                     .await()
                 return@withContext if (docSnapShot != null && docSnapShot.exists() && docSnapShot.data != null)
                     Result.Success(docSnapShot.toObject(Church::class.java)!!)

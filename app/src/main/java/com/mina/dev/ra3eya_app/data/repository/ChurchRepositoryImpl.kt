@@ -34,6 +34,7 @@ class ChurchRepositoryImpl @Inject constructor(
 
     override suspend fun refreshChurches(): Result<List<Church>> {
         return churchRemoteDataSource.readAllChurches().onSuccess {
+            churchLocalDataSource.clearChurches()
             churchLocalDataSource.addAllChurches(it)
         }
     }

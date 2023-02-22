@@ -5,14 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mina.dev.ra3eya_app.databinding.MemberNameItemBinding
+import com.mina.dev.ra3eya_app.domain.model.Member
 import com.mina.dev.ra3eya_app.domain.model.MemberNameId
 
 class MembersAdapter(private val onItemClickListener: ItemClickListener) :
-    ListAdapter<MemberNameId, MembersAdapter.MyViewHolder>(MembersDiffUtilsCallback()) {
+    ListAdapter<Member, MembersAdapter.MyViewHolder>(MembersDiffUtilsCallback()) {
 
     inner class MyViewHolder(private val binding: MemberNameItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(member: MemberNameId) {
+        fun bindData(member: Member) {
             binding.member = member
         }
 
@@ -31,7 +32,7 @@ class MembersAdapter(private val onItemClickListener: ItemClickListener) :
     }
 
     interface ItemClickListener {
-        fun onMemberItemClick(member: MemberNameId)
+        fun onMemberItemClick(member: Member)
     }
 
 

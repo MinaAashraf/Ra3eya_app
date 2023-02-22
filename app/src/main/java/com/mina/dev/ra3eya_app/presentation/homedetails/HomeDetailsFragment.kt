@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.mina.dev.ra3eya_app.R
 import com.mina.dev.ra3eya_app.databinding.FamilyAddingDialogBinding
-import com.mina.dev.ra3eya_app.databinding.FragmentHomeDetailsBinding
+
 import com.mina.dev.ra3eya_app.domain.model.CollectionsKeys
 import com.mina.dev.ra3eya_app.domain.model.Family
 import com.mina.dev.ra3eya_app.domain.model.FamilyNameId
@@ -24,14 +24,25 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeDetailsFragment : Fragment(), FamiliesAdapter.ItemClickListener {
-    private val binding by lazy { FragmentHomeDetailsBinding.inflate(layoutInflater) }
+    private val binding by lazy {
+        com.mina.dev.ra3eya_app.databinding.FragmentHomeDetailsBinding.inflate(
+            layoutInflater
+        )
+    }
     private lateinit var home: Home
+    private lateinit var homeId: String
+
     private val viewModel by viewModels<HomeDetailsViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        arguments?.let { home = it.getParcelable<Home>(getString(R.string.home_key)) as Home }
+        arguments?.let {
+            if (it.containsKey(getString(R.string.home_key)))
+                home = it.getParcelable<Home>(getString(R.string.home_key)) as Home
+            else
+                homeId = it.getString(getString(R.string.homeId_key) , "")
+        }
         setUpUi()
         return binding.root
     }
@@ -53,18 +64,20 @@ class HomeDetailsFragment : Fragment(), FamiliesAdapter.ItemClickListener {
 
     private fun setClickListenerOnAddFamilyBtn() {
         binding.addFamilyBtn.setOnClickListener {
-            //findNavController().navigate(R.id.action_homeDetailsFragment_to_familyFragment)
             showAddingFamilyDialog()
         }
     }
 
-    private var families = mutableListOf<FamilyNameId>()
+    private lateinit var familiesAdapter: FamiliesAdapter
     private fun setUpFamiliesRecyclerView() {
-        home.families?.let {
-            families = it.toMutableList()
-            val familiesAdapter = FamiliesAdapter(this).apply { submitList(families) }
-            binding.familiesRecyclerView.adapter = familiesAdapter
-        }
+        /*  home.families?.let {
+              families = it.toMutableList()
+              val familiesAdapter = FamiliesAdapter(this).apply { submitList(families) }
+              binding.familiesRecyclerView.adapter = familiesAdapter
+          }*/
+        familiesAdapter = FamiliesAdapter(this)
+        binding.familiesRecyclerView.adapter = familiesAdapter
+        getHomeFamilies()
     }
 
 
@@ -95,7 +108,7 @@ class HomeDetailsFragment : Fragment(), FamiliesAdapter.ItemClickListener {
         floorNum: String,
         churchId: String,
         homeId: String,
-        familyAddress : String
+        familyAddress: String
     ) {
         if (validateInputFamily()) {
             val family = Family(
@@ -128,26 +141,43 @@ class HomeDetailsFragment : Fragment(), FamiliesAdapter.ItemClickListener {
 
     private fun observeOnAddingFamily() {
         viewModel.loading.observe(viewLifecycleOwner) {
-            it.second?.let { message ->
-                Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
-                alertDialog.dismiss()
-            }
-
-        }
-        viewModel.familyResult.observe(viewLifecycleOwner) {
             it?.let {
-                families.add(it)
+                it.second?.let { message ->
+                    Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+                    alertDialog.dismiss()
+                }
             }
         }
+        /* viewModel.familyResult.observe(viewLifecycleOwner) {
+             it?.let {
+                 families.add(it)
+             }
+         }*/
 
     }
 
-    override fun onFamilyItemClick(familyNameId: FamilyNameId) {
+    override fun onFamilyItemClick(family: Family) {
         findNavController().navigate(
             R.id.action_homeDetailsFragment_to_familyDetailsFragment,
             Bundle().apply {
-               putParcelable(getString(R.string.home_key),home)
-               putParcelable(getString(R.string.familyNameId_key),familyNameId)
+                putParcelable(getString(R.string.family_key), family)
             })
     }
+
+    private fun getHomeFamilies() {
+        viewModel.getHomeFamilies(home.homeId).observe(viewLifecycleOwner) {
+            it?.let {
+                if (it.isNotEmpty()) {
+                    familiesAdapter.submitList(it)
+                    binding.homeFamiliesContainer.show()
+                } else
+                    binding.homeFamiliesContainer.hide()
+
+            } ?: kotlin.run {
+                binding.homeFamiliesContainer.hide()
+            }
+        }
+    }
+
+
 }

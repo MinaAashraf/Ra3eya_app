@@ -16,12 +16,19 @@ class MemberRepositoryImpl @Inject constructor(
 ) :
     MemberRepository {
     override suspend fun addMember(uri: Uri?, member: Member) =
-        memberRemoteDataSource.addMember(uri, member)
+        memberRemoteDataSource.addMember(uri, member).onSuccess {
+            memberLocalDataSource.insertMember(it)
+        }
 
-    override suspend fun readMember(memberId: String, churchId: String): Result<Member> =
-        memberRemoteDataSource.readMember(memberId, churchId)
+
+    override fun readMember(memberName: String, homeId: String): LiveData<Member> =
+        memberLocalDataSource.readMember(memberName, homeId)
 
     override fun readMembers(): LiveData<List<Member>> = memberLocalDataSource.readMembers()
+
+    override fun readMembersOfFamily(familyName: String, homeId:String): LiveData<List<Member>> {
+       return  memberLocalDataSource.readMemberOfFamily(familyName, homeId)
+    }
 
     override suspend fun refreshMembers(churchId: String) {
         memberRemoteDataSource.readMembers(churchId).onSuccess {

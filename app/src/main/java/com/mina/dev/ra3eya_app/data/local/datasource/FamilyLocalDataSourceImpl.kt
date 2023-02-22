@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class FamilyLocalDataSourceImpl @Inject constructor(private val familyDao: FamilyDao) :
     FamilyLocalDataSource {
-    override fun readAllFamiliesOfHome(churchId: String, homeId: String) =
-        familyDao.readAllFamiliesOfHome(churchId, homeId)
+    override fun readAllFamiliesOfHome(homeId: String) =
+        familyDao.readAllFamiliesOfHome(homeId)
 
     override suspend fun insertFamily(family: Family) {
         familyDao.insertFamily(family)
@@ -18,15 +18,15 @@ class FamilyLocalDataSourceImpl @Inject constructor(private val familyDao: Famil
         familyDao.insertAllFamilies(families)
     }
 
-    override fun readFamily(familyName: String): LiveData<Family> =
-        familyDao.readFamily(familyName)
+    override fun readFamily(familyName: String,homeId: String): LiveData<Family> =
+        familyDao.readFamily(familyName,homeId)
 
     override fun readFamilies(): LiveData<List<Family>> = familyDao.readFamilies()
 
-    override fun searchFamily(familyNameSubString: String): List<LiveData<Family>> =
+    override fun searchFamily(familyNameSubString: String): LiveData<List<Family>> =
         familyDao.searchFamily(familyNameSubString)
 
-    override fun clearAllFamilies() {
+    override suspend fun clearAllFamilies() {
         familyDao.clearFamilies()
     }
 }

@@ -52,6 +52,12 @@
         <action
             android:id="@+id/action_mapFragment_to_homeDetailsFragment"
             app:destination="@id/homeDetailsFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_familyDetailsFragment2"
+            app:destination="@id/familyDetailsFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_memberDetailsFragment"
+            app:destination="@id/memberDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapWithSearchFragment"
@@ -106,9 +112,19 @@
         <action
             android:id="@+id/action_familyDetailsFragment_to_memberDetailsFragment"
             app:destination="@id/memberDetailsFragment" />
+        <action
+            android:id="@+id/action_familyDetailsFragment_to_homeDetailsFragment"
+            app:destination="@id/homeDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/memberDetailsFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.memberdetails.MemberDetailsFragment"
-        android:label="MemberDetailsFragment" />
+        android:label="MemberDetailsFragment" >
+        <action
+            android:id="@+id/action_memberDetailsFragment_to_familyDetailsFragment"
+            app:destination="@id/familyDetailsFragment" />
+        <action
+            android:id="@+id/action_memberDetailsFragment_to_homeDetailsFragment"
+            app:destination="@id/homeDetailsFragment" />
+    </fragment>
 </navigation>

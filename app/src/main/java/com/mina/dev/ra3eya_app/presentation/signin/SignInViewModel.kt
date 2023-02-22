@@ -39,22 +39,23 @@ class SignInViewModel @Inject constructor(
 
     val allChurches = readAllChurchesUseCase.execute()
 
-    var church = Church()
 
 
-    fun signIn(churchCredentials: ChurchCredentials) {
-        _loading.postValue(true)
-        signInUseCase.execute(churchCredentials).value?.let {
-            church = it
-            _succeeded.postValue(Pair(true, "تم الدخول بنجاح"))
+    fun signIn(churchCredentials: ChurchCredentials, context: Context) : LiveData<Church> {
+        // _loading.postValue(true)
+        return signInUseCase.execute(churchCredentials)
+
+        /*       church = it
+            _succeeded.postValue(Pair(true, context.getString(R.string.sign_in_successfully_message)))
             _loading.postValue(false)
 
         } ?: kotlin.run {
-            _succeeded.postValue(Pair(false, "تأكد من الرقم السري"))
+            _succeeded.postValue(Pair(false,context.getString(R.string.wrong_password_msg) ))
             _loading.postValue(false)
-        }
-
+        }*/
     }
+
+
     /*viewModelScope.launch {
         signInUseCase.execute(churchCredentials).onSuccess {
             church = it
@@ -88,10 +89,10 @@ class SignInViewModel @Inject constructor(
     fun isAuthenticated(context: Context) =
         sharedPref.getBoolean(context.getString(R.string.authenticated_key), false)
 
-    fun saveState(context: Context) {
+    fun saveState(context: Context,churchId : String) {
         sharedPrefEditor.apply {
             putBoolean(context.getString(R.string.authenticated_key), true)
-            putString(context.getString(R.string.church_id_key), church.id)
+            putString(context.getString(R.string.church_id_key), churchId)
             apply()
         }
     }

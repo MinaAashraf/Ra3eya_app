@@ -7,15 +7,17 @@ import com.mina.dev.ra3eya_app.domain.model.FamilyNameId
 import com.mina.dev.ra3eya_app.domain.util.Result
 
 interface FamilyRepository {
-    suspend fun addFamily( family: Family): Result<FamilyNameId>
-     fun readFamily(
+    suspend fun addFamily(family: Family): Result<FamilyNameId>
+    fun readFamily(
         familyId: String,
-        churchId: String
-    ) : LiveData<Family>
+        homeId: String
+    ): LiveData<Family>
 
-     fun readFamilies (): LiveData<List<Family>>
+    fun readFamilies(): LiveData<List<Family>>
 
-    suspend fun refreshAllFamilies (churchId : String)
-    suspend fun searchFamily (familyName : String) : List<LiveData<Family>>
+    suspend fun refreshAllFamilies(churchId: String)
+    suspend fun searchFamily(familyName: String): LiveData<List<Family>>
+
+    fun readFamiliesOfHome(homeId: String) : LiveData<List<Family>>
 
 }

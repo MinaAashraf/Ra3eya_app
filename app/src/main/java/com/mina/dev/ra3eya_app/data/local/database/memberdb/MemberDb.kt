@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.mina.dev.ra3eya_app.domain.model.Member
 
 
-@Database (entities = [Member::class], version = 1, exportSchema = false)
+@Database (entities = [Member::class], version = 2, exportSchema = false)
 abstract class MemberDb : RoomDatabase() {
     abstract fun getDao () : MemberDao
 

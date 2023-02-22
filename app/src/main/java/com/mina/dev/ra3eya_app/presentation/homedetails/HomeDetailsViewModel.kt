@@ -9,6 +9,8 @@ import com.mina.dev.ra3eya_app.R
 import com.mina.dev.ra3eya_app.domain.model.Family
 import com.mina.dev.ra3eya_app.domain.model.FamilyNameId
 import com.mina.dev.ra3eya_app.domain.usecases.AddFamilyUseCase
+import com.mina.dev.ra3eya_app.domain.usecases.ReadFamiliesOfHomeUseCase
+import com.mina.dev.ra3eya_app.domain.usecases.ReadFamiliesUseCase
 import com.mina.dev.ra3eya_app.domain.util.onFailure
 import com.mina.dev.ra3eya_app.domain.util.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,13 +20,16 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeDetailsViewModel @Inject constructor(private val addFamilyUseCase: AddFamilyUseCase) :
+class HomeDetailsViewModel @Inject constructor(
+    private val addFamilyUseCase: AddFamilyUseCase,
+    private val readFamiliesOfHomeUseCase : ReadFamiliesOfHomeUseCase,
+) :
     ViewModel() {
 
     private val _familyResult = MutableLiveData<FamilyNameId?>()
     val familyResult: LiveData<FamilyNameId?> = _familyResult
 
-    private val _loading = MutableLiveData<Pair<Boolean, String?>>()
+    private val _loading = MutableLiveData<Pair<Boolean, String?>>(null)
     var loading: LiveData<Pair<Boolean, String?>> = _loading
 
     fun addFamily(context: Context, family: Family) {
@@ -44,6 +49,8 @@ class HomeDetailsViewModel @Inject constructor(private val addFamilyUseCase: Add
             }
         }
     }
+
+    fun getHomeFamilies(homeId: String): LiveData<List<Family>> = readFamiliesOfHomeUseCase.execute(homeId)
 
 
 }

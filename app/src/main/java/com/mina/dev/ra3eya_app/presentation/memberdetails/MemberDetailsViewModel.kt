@@ -20,21 +20,21 @@ import javax.inject.Inject
 class MemberDetailsViewModel @Inject constructor(private val readMemberUseCase: ReadMemberUseCase) :
     ViewModel() {
 
-    private val _member = MutableLiveData<Member>()
-    val member: LiveData<Member> = _member
+    var member: LiveData<Member> = MutableLiveData<Member>(null)
 
 
-    fun readMember(memberId: String, churchId: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            readMemberUseCase.execute(memberId, churchId)
-                .onSuccess {
-                    withContext(Dispatchers.Main) {
-                        _member.value = it
-                    }
+    fun readMember(memberName: String, homeId: String) =
+        readMemberUseCase.execute(memberName, homeId)
+    /*viewModelScope.launch(Dispatchers.IO) {
+        readMemberUseCase.execute(memberId, churchId)
+            .onSuccess {
+                withContext(Dispatchers.Main) {
+                    _member.value = it
                 }
-                .onFailure {
-                }
-        }
-    }
+            }
+            .onFailure {
+            }
+    }*/
+
 
 }

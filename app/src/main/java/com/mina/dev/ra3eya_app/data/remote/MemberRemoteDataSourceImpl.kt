@@ -25,7 +25,7 @@ class MemberRemoteDataSourceImpl @Inject constructor(
     private val storage: StorageReference,
     @ApplicationContext private val context: Context
 ) : MemberRemoteDataSource {
-    override suspend fun addMember(uri: Uri?, member: Member): Result<MemberNameId> {
+    override suspend fun addMember(uri: Uri?, member: Member): Result<Member> {
         return withContext(Dispatchers.IO)
         {
             try {
@@ -44,15 +44,15 @@ class MemberRemoteDataSourceImpl @Inject constructor(
 
                 val memberNameId = MemberNameId(member.name, docSnapShot.id)
 
-                churchRef.document(member.churchId)
+               /* churchRef.document(member.churchId)
                     .collection(context.getString(R.string.families_collection_key))
                     .document(member.familyId)
                     .update(
                         context.getString(R.string.persons_filed_key),
                         FieldValue.arrayUnion(memberNameId)
                     ).await()
-
-                Result.Success(memberNameId)
+*/
+                Result.Success(member)
             } catch (e: FirebaseException) {
                 Result.Failure(e)
             }

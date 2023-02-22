@@ -5,14 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mina.dev.ra3eya_app.databinding.FamilyNameItemBinding
+import com.mina.dev.ra3eya_app.domain.model.Family
 import com.mina.dev.ra3eya_app.domain.model.FamilyNameId
 
 class FamiliesAdapter(private val onItemClickListener: ItemClickListener) :
-    ListAdapter<FamilyNameId, FamiliesAdapter.MyViewHolder>(FamiliesDiffUtilsCallback()) {
+    ListAdapter<Family, FamiliesAdapter.MyViewHolder>(FamiliesDiffUtilsCallback()) {
 
     inner class MyViewHolder(private val binding: FamilyNameItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(family: FamilyNameId) {
+        fun bindData(family: Family) {
             binding.family = family
         }
 
@@ -32,7 +33,7 @@ class FamiliesAdapter(private val onItemClickListener: ItemClickListener) :
     }
 
     interface ItemClickListener {
-        fun onFamilyItemClick(familyNameId: FamilyNameId)
+        fun onFamilyItemClick(family: Family)
     }
 
 

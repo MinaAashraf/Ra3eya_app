@@ -13,6 +13,9 @@ data class Church (
      var id: String = "",
      var location: MyLocation? = null,
      var addressLine : String? = null,
-     @PrimaryKey var key : Int? = null
  //    var homes: MutableList<Home> = mutableListOf()
 ) : Parcelable
+{
+     @PrimaryKey(autoGenerate = true) var key : Int? = null
+
+}

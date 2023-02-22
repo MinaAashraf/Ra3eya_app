@@ -5,7 +5,7 @@
     <data>
            <variable
                name="family"
-               type="com.mina.dev.ra3eya_app.domain.model.FamilyNameId" />
+               type="com.mina.dev.ra3eya_app.domain.model.Family" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black800"
-            android:text="@{family.name}"
+            android:text="@{family.familyName}"
             android:textSize="@dimen/font_md"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

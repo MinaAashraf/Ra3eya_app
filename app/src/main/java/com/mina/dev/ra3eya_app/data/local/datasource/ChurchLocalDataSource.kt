@@ -16,6 +16,8 @@ interface ChurchLocalDataSource {
 
     fun signIn (churchName : String, churchPassword: String) : LiveData<Church>
 
+    suspend fun clearChurches ()
+
 
 
 }

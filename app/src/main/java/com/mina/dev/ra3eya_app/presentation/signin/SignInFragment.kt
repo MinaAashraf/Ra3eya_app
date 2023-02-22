@@ -1,6 +1,7 @@
 package com.mina.dev.ra3eya_app.presentation.signin
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,13 +46,7 @@ class SignInFragment : Fragment() {
             if (validateInputs()) {
                 val churchName = binding.churchNameField.editText?.text.toString()
                 val password = binding.passwordField.editText?.text.toString()
-                viewModel.signIn(
-                    ChurchCredentials(
-                        churchName,
-                        password,
-                        id = churchName
-                    )
-                )
+                signIn(ChurchCredentials(churchName, password, churchName))
 
             }
         }
@@ -71,42 +66,70 @@ class SignInFragment : Fragment() {
         if (binding.passwordField.editText!!.text.isEmpty()) {
             binding.passwordField.helperText = getString(R.string.password_error_msg)
             validate = false
-        }
-        if (binding.passwordField.editText!!.text.length < 8) {
+        } else if (binding.passwordField.editText!!.text.length < 8) {
             binding.passwordField.helperText = getString(R.string.password_weak_msg)
             validate = false
         }
         return validate
     }
 
-    private fun observeViewModel() {
-        viewModel.succeeded.observe(viewLifecycleOwner) { it ->
+    private fun signIn(churchCredentials: ChurchCredentials) {
+        viewModel.signIn(
+            churchCredentials, requireContext()
+        ).observe(viewLifecycleOwner) {
             it?.let {
-                if (it.first) {
-                    Snackbar.make(binding.root, it.second.toString(), Snackbar.LENGTH_SHORT).show()
-                    findNavController().navigate(
-                        R.id.action_signInFragment_to_mapFragment,
-                        Bundle().apply {
-                            putParcelable("church", viewModel.church)
-                        })
-                    viewModel.saveState(requireContext())
-                    viewModel.clearLiveData()
-                } else {
-                    Snackbar.make(binding.root, it.second.toString(), Snackbar.LENGTH_SHORT).show()
-                    binding.progressBar.hide()
-                    binding.signInBtn.show()
-                }
+                findNavController().navigate(
+                    R.id.action_signInFragment_to_mapFragment,
+                    Bundle().apply {
+                        putParcelable("church", it)
+                    })
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.sign_in_successfully_message),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                viewModel.saveState(requireContext(), it.id)
+                viewModel.clearLiveData()
+            } ?: kotlin.run {
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.wrong_password_msg),
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
+    }
 
-        viewModel.loading.observe(viewLifecycleOwner) {
-            it?.let {
-                if (it) {
-                    binding.progressBar.show()
-                    binding.signInBtn.hide()
-                }
-            }
-        }
+    private fun observeViewModel() {
+
+
+        /*     viewModel.succeeded.observe(viewLifecycleOwner) { it ->
+                 it?.let {
+                     if (it.first) {
+                         Snackbar.make(binding.root, it.second.toString(), Snackbar.LENGTH_SHORT).show()
+                         findNavController().navigate(
+                             R.id.action_signInFragment_to_mapFragment,
+                             Bundle().apply {
+                                 putParcelable("church", viewModel.church)
+                             })
+                         viewModel.saveState(requireContext())
+                         viewModel.clearLiveData()
+                     } else {
+                         Snackbar.make(binding.root, it.second.toString(), Snackbar.LENGTH_SHORT).show()
+                         binding.progressBar.hide()
+                         binding.signInBtn.show()
+                     }
+                 }
+             }
+
+             viewModel.loading.observe(viewLifecycleOwner) {
+                 it?.let {
+                     if (it) {
+                         binding.progressBar.show()
+                         binding.signInBtn.hide()
+                     }
+                 }
+             }*/
 
         viewModel.allChurches.observe(viewLifecycleOwner) {
             it?.let {
@@ -117,6 +140,7 @@ class SignInFragment : Fragment() {
                 binding.churchNameAutoCompleteTv.setAdapter(churchesAdapter)
             }
         }
+
     }
 
 

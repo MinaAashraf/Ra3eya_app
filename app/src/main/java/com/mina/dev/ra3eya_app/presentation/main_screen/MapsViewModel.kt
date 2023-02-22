@@ -25,11 +25,11 @@ import javax.inject.Inject
 class MapsViewModel @Inject constructor(
     private val readChurchUseCase: ReadChurchUseCase,
     readHomesUseCase: ReadHomesUseCase,
+    readFamiliesUseCase: ReadFamiliesUseCase,
+    readAllMemberUseCase: ReadAllMembersUseCase,
     private val refreshHomesUseCase: RefreshHomesUseCase,
     private val refreshMembersUseCase: RefreshMembersUseCase,
-    readAllMembersUseCase: ReadAllMembersUseCase,
     private val refreshFamiliesUseCase: RefreshFamiliesUseCase,
-    readFamiliesUseCase: ReadFamiliesUseCase,
     private val sharedPreferences: SharedPreferences
 ) :
     ViewModel() {
@@ -43,10 +43,8 @@ class MapsViewModel @Inject constructor(
 
     var homes: LiveData<List<Home>> = readHomesUseCase.execute()
     var families: LiveData<List<Family>> = readFamiliesUseCase.execute()
-    var members: LiveData<List<Member>> = readAllMembersUseCase.execute()
-    /* var families: LiveData<List<Family>> = .execute()
-     var members: LiveData<List<Home>> = readHomesUseCase.execute()
- */
+    var members: LiveData<List<Member>> = readAllMemberUseCase.execute()
+
 
     fun readChurch(context: Context) {
         val churchId = getStoredChurchId(context)

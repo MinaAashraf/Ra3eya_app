@@ -24,8 +24,8 @@ class MemberFormViewModel @Inject constructor(
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-    private val _memberResult = MutableLiveData<MemberNameId?>(null)
-    val memberResult: LiveData<MemberNameId?> = _memberResult
+    private val _memberResult = MutableLiveData<Member?>(null)
+    val memberResult: LiveData<Member?> = _memberResult
 
 
     fun addMember(uri: Uri?, member: Member) {
@@ -34,7 +34,7 @@ class MemberFormViewModel @Inject constructor(
             addMemberUseCase.execute(uri, member).onSuccess {
                 withContext(Dispatchers.Main) {
                     _loading.value = false
-                    _memberResult.value = it
+                     _memberResult.value = it
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {

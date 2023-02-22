@@ -16,7 +16,6 @@ class FamilyRepositoryImpl @Inject constructor(
     private val familyRemoteDataSource: FamilyRemoteDataSource,
     private val familyLocalDataSource: FamilyLocalDataSource,
     @ApplicationContext private val context: Context
-
 ) :
     FamilyRepository {
     override suspend fun addFamily(family: Family): Result<FamilyNameId> {
@@ -25,8 +24,8 @@ class FamilyRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun readFamily(familyName: String, churchId: String): LiveData<Family> =
-        familyLocalDataSource.readFamily(familyName)
+    override fun readFamily(familyName: String, homeId: String): LiveData<Family> =
+        familyLocalDataSource.readFamily(familyName,homeId)
 
     override fun readFamilies(): LiveData<List<Family>> = familyLocalDataSource.readFamilies()
 
@@ -37,8 +36,12 @@ class FamilyRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun searchFamily(familyName: String): List<LiveData<Family>> {
+    override suspend fun searchFamily(familyName: String): LiveData<List<Family>> {
         return familyLocalDataSource.searchFamily(familyName)
+    }
+
+    override fun readFamiliesOfHome(homeId: String): LiveData<List<Family>> {
+        return familyLocalDataSource.readAllFamiliesOfHome(homeId)
     }
 
 

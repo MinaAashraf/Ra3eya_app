@@ -7,7 +7,7 @@ import com.mina.dev.ra3eya_app.domain.util.Result
 
 interface MemberRemoteDataSource {
 
-   suspend fun addMember(uri: Uri?,member:Member) : Result<MemberNameId>
+   suspend fun addMember(uri: Uri?,member:Member) : Result<Member>
    suspend fun readMember (memberId : String, churchId : String) : Result<Member>
    suspend fun readMembers (churchId : String) : Result<List<Member>>
 

@@ -7,7 +7,7 @@ import com.mina.dev.ra3eya_app.domain.repository.MemberRepository
 import com.mina.dev.ra3eya_app.domain.util.Result
 import javax.inject.Inject
 
-class ReadMemberUseCase @Inject constructor(private val memberRepository: MemberRepository) {
-     fun execute(memberName : String,homeId:String) =
-        memberRepository.readMember(memberName, homeId)
+class ReadFamilyMembersUseCase @Inject constructor(private val memberRepository: MemberRepository) {
+    fun execute(familyName: String, homeId:String) =
+        memberRepository.readMembersOfFamily(familyName,homeId)
 }

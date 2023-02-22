@@ -18,6 +18,6 @@ class HomeLocalDataSourceImpl @Inject constructor(private val homeDao: HomeDao) 
         homeDao.insertHomes(homes)
     }
 
-    override fun searchHome(homeNameSubString: String, churchId: String): List<LiveData<Home>> =
+    override fun searchHome(homeNameSubString: String, churchId: String): LiveData<List<Home>> =
         homeDao.searchHome(homeNameSubString, churchId)
 }

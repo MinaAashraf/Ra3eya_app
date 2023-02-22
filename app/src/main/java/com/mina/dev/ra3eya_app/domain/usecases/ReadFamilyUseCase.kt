@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 
 class ReadFamilyUseCase @Inject constructor(private val readFamilyRepo: FamilyRepository) {
-    fun execute(familyName:String,churchId:String): LiveData<Family> {
-        return readFamilyRepo.readFamily(familyName, churchId)
+    fun execute(familyName:String,homeId:String): LiveData<Family> {
+        return readFamilyRepo.readFamily(familyName, homeId)
     }
 }

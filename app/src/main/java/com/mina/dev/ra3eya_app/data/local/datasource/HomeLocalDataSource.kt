@@ -8,7 +8,7 @@ interface HomeLocalDataSource {
     fun readHomes(): LiveData<List<Home>>
     fun insertHome(home: Home)
     fun insertHomes(homes: List<Home>)
-    fun searchHome(homeNameSubString: String, churchId: String): List<LiveData<Home>>
+    fun searchHome(homeNameSubString: String, churchId: String): LiveData<List<Home>>
 
 
 }

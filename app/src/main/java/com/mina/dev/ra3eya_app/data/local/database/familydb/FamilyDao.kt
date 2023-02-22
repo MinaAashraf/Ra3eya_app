@@ -13,29 +13,29 @@ import com.mina.dev.ra3eya_app.domain.util.Result
 @Dao
 interface FamilyDao {
 
-    @Query("Select * from family_table where churchId =:churchId and homeId = :homeId")
-    fun readAllFamiliesOfHome(churchId: String, homeId: String)
+    @Query("Select * from family_table where homeId = :homeId")
+    fun readAllFamiliesOfHome(homeId: String): LiveData<List<Family>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFamily(family: Family)
+    suspend fun insertFamily(family: Family)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllFamilies(families: List<Family>)
+    suspend fun insertAllFamilies(families: List<Family>)
 
 
     @Query("select * from family_table where familyName =:familyNameSubString")
-    fun searchFamily(familyNameSubString: String): List<LiveData<Family>>
+    fun searchFamily(familyNameSubString: String): LiveData<List<Family>>
 
 
-    @Query("select * from family_table where  familyName=:familyName")
-    fun readFamily(familyName: String): LiveData<Family>
+    @Query("select * from family_table where  familyName=:familyName and homeId =:homeId")
+    fun readFamily(familyName: String,homeId:String): LiveData<Family>
 
     @Query("select * from family_table")
     fun readFamilies(): LiveData<List<Family>>
 
 
     @Query("DELETE FROM family_table")
-    fun clearFamilies()
+    suspend fun clearFamilies()
 
 
 }
