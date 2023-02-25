@@ -1,9 +1,12 @@
 package com.mina.dev.ra3eya_app.presentation.signup
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -11,6 +14,7 @@ import com.mina.dev.ra3eya_app.R
 import com.mina.dev.ra3eya_app.databinding.FragmentSignUpBinding
 import com.mina.dev.ra3eya_app.domain.model.Church
 import com.mina.dev.ra3eya_app.presentation.utils.hide
+import com.mina.dev.ra3eya_app.presentation.utils.hideKeyboard
 import com.mina.dev.ra3eya_app.presentation.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +28,7 @@ class SignUpFragment : Fragment() {
     ): View {
         setUpViews()
         observeViewModel()
+        handleSoftKeyboard()
         return binding.root
     }
 
@@ -58,13 +63,22 @@ class SignUpFragment : Fragment() {
 
     private fun showAddressTextIfExist() {
         viewModel.church.addressLine?.let {
-            binding.addressTxt.text = it
+            binding.addressTxt.apply {
+                text = "تمت اضافة العنوان"
+                setTextColor(Color.BLACK)
+            }
+
         }
     }
 
 
     private fun validateInputs(): Boolean {
         var validate = true
+
+        binding.churchNameField.helperText = null
+        binding.passwordField.helperText = null
+        binding.addressTxt.text = null
+
         if (binding.churchNameField.editText!!.text!!.isEmpty()) {
             binding.churchNameField.helperText = getString(R.string.church_name_error_msg)
             validate = false
@@ -72,8 +86,7 @@ class SignUpFragment : Fragment() {
         if (binding.passwordField.editText!!.text.isEmpty()) {
             binding.passwordField.helperText = getString(R.string.password_error_msg)
             validate = false
-        }
-        if (binding.passwordField.editText!!.text.length < 8) {
+        } else if (binding.passwordField.editText!!.text.length < 8) {
             binding.passwordField.helperText = getString(R.string.password_weak_msg)
             validate = false
         }
@@ -113,6 +126,15 @@ class SignUpFragment : Fragment() {
                     binding.saveChurchBtn.hide()
                 }
             }
+        }
+    }
+
+    private fun handleSoftKeyboard() {
+        binding.parentLayout.setOnClickListener {
+            (it as ConstraintLayout).children.forEach {
+                it.hideKeyboard()
+            }
+            // binding.memberNameField.editText!!.hideKeyboard()
         }
     }
 

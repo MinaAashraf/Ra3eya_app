@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.signup.SignUpFragment"
-        android:label="SignUpFragment" >
+
+        >
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment"
@@ -27,7 +28,7 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.signin.SignInFragment"
-        android:label="SignInFragment" >
+    >
         <action
             android:id="@+id/action_signInFragment_to_mapFragment"
             app:destination="@id/mapFragment"
@@ -42,7 +43,7 @@
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.main_screen.MapFragment"
-        android:label="MapFragment" >
+         >
         <action
             android:id="@+id/action_mapFragment_to_homeFormFragment"
             app:destination="@id/homeFormFragment"
@@ -62,7 +63,7 @@
     <fragment
         android:id="@+id/mapWithSearchFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.location.MapWithSearchFragment"
-        android:label="MapWithSearchFragment" >
+       >
         <action
             android:id="@+id/action_mapWithSearchFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -75,7 +76,8 @@
     <fragment
         android:id="@+id/homeFormFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.homeform.HomeFormFragment"
-        android:label="HomeFormFragment" >
+
+        >
         <action
             android:id="@+id/action_homeFormFragment_to_mapWithSearchFragment"
             app:destination="@id/mapWithSearchFragment"
@@ -92,12 +94,11 @@
     <fragment
         android:id="@+id/memberFormFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.familyform.MemberFormFragment"
-        android:label="fragment_member_form"
         tools:layout="@layout/fragment_member_form" />
     <fragment
         android:id="@+id/homeDetailsFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.homedetails.HomeDetailsFragment"
-        android:label="HomeDetailsFragment" >
+    >
         <action
             android:id="@+id/action_homeDetailsFragment_to_familyDetailsFragment"
             app:destination="@id/familyDetailsFragment" />
@@ -105,7 +106,7 @@
     <fragment
         android:id="@+id/familyDetailsFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.familydetails.FamilyDetailsFragment"
-        android:label="FamilyDetailsFragment" >
+       >
         <action
             android:id="@+id/action_familyDetailsFragment_to_memberFormFragment"
             app:destination="@id/memberFormFragment" />
@@ -119,7 +120,7 @@
     <fragment
         android:id="@+id/memberDetailsFragment"
         android:name="com.mina.dev.ra3eya_app.presentation.memberdetails.MemberDetailsFragment"
-        android:label="MemberDetailsFragment" >
+        >
         <action
             android:id="@+id/action_memberDetailsFragment_to_familyDetailsFragment"
             app:destination="@id/familyDetailsFragment" />

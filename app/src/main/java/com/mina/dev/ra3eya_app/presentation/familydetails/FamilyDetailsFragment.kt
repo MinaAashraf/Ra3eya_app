@@ -87,6 +87,7 @@ class FamilyDetailsFragment : Fragment(), MembersAdapter.ItemClickListener {
                         if (it.isNotEmpty()) {
                             membersAdapter.submitList(it)
                             binding.progressBar.hide()
+                            binding.notExistMemberLabel.hide()
                         } else
                             binding.notExistMemberLabel.show()
                     } ?: kotlin.run {

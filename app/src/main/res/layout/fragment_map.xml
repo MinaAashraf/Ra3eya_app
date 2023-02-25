@@ -26,13 +26,15 @@
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_50sdp"
             android:layout_marginStart="@dimen/_20sdp"
             android:background="@drawable/background_searchview"
             app:layout_constraintTop_toTopOf="parent"
             android:elevation="1dp"
+            android:textSize="@dimen/font_md"
+            android:textColor="@color/purple_500"
             android:id="@+id/autoComplete_search_view"
             android:gravity="start|center"
             android:layoutDirection="rtl"

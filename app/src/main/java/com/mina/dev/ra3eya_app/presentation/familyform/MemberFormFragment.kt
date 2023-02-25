@@ -102,8 +102,9 @@ class MemberFormFragment : Fragment() {
                     Snackbar.LENGTH_LONG
                 ).show()
 
-                binding.memberTitle.text = "فرد $memberCounter"
+                binding.memberTitle.text = "فرد ${++memberCounter}"
                 binding.progressBar.hide()
+                binding.saveMemberBtn.show()
             }
         }
     }

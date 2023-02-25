@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,7 @@ import com.mina.dev.ra3eya_app.databinding.FragmentSignInBinding
 import com.mina.dev.ra3eya_app.domain.model.Church
 import com.mina.dev.ra3eya_app.domain.model.ChurchCredentials
 import com.mina.dev.ra3eya_app.presentation.utils.hide
+import com.mina.dev.ra3eya_app.presentation.utils.hideKeyboard
 import com.mina.dev.ra3eya_app.presentation.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +36,7 @@ class SignInFragment : Fragment() {
         setUpViews()
         isAuthenticated()
         observeViewModel()
+        handleSoftKeyboard()
         return binding.root
     }
 
@@ -59,6 +63,9 @@ class SignInFragment : Fragment() {
 
     private fun validateInputs(): Boolean {
         var validate = true
+        binding.churchNameField.helperText=null
+        binding.passwordField.helperText=null
+
         if (binding.churchNameField.editText!!.text!!.isEmpty()) {
             binding.churchNameField.helperText = getString(R.string.church_name_error_msg)
             validate = false
@@ -67,7 +74,7 @@ class SignInFragment : Fragment() {
             binding.passwordField.helperText = getString(R.string.password_error_msg)
             validate = false
         } else if (binding.passwordField.editText!!.text.length < 8) {
-            binding.passwordField.helperText = getString(R.string.password_weak_msg)
+            binding.passwordField.helperText = getString(R.string.wrong_password_msg)
             validate = false
         }
         return validate
@@ -142,6 +149,13 @@ class SignInFragment : Fragment() {
         }
 
     }
-
+    private fun handleSoftKeyboard() {
+        binding.parentLayout.setOnClickListener {
+            (it as ConstraintLayout).children.forEach {
+                it.hideKeyboard()
+            }
+            // binding.memberNameField.editText!!.hideKeyboard()
+        }
+    }
 
 }

@@ -18,9 +18,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/screen_margin"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/screen_margin"
             android:layoutDirection="rtl"
+            android:id="@+id/parent_layout"
             tools:context=".presentation.SignUp">
 
 
@@ -38,7 +39,7 @@
                 android:id="@+id/church_name_field"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_40sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/church_name_hint"
+                    android:textSize="@dimen/font_md"
                     android:inputType="textPersonName"
                     android:paddingStart="@dimen/field_Padding" />
 
@@ -60,7 +62,7 @@
                 android:id="@+id/password_field"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +74,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_label"
+                    android:textDirection="rtl"
+                    android:gravity="right"
+                    android:textSize="@dimen/font_md"
                     android:inputType="textPassword"
                     android:paddingStart="@dimen/field_Padding" />
 
@@ -85,7 +90,7 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:backgroundTint="@color/black"
                 android:text="@string/adding_address_label"
-                android:textSize="@dimen/font_lg"
+                android:textSize="@dimen/font_md"
                 app:layout_constraintEnd_toEndOf="@+id/church_name_field"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password_field"
@@ -97,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_7ssp"
                 android:layout_marginStart="@dimen/_15sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/adding_address_btn" />
@@ -110,10 +115,9 @@
                 android:text="@string/save_label"
                 android:textSize="@dimen/font_xlg"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-
+                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintTop_toBottomOf="@id/adding_address_btn" />
 
             <ProgressBar

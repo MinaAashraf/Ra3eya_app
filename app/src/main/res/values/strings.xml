@@ -228,6 +228,7 @@
     <string name="empty_location_err">لم يتم تحديد العنوان!</string>
   <string name="add_church_address_msg">يجب ادخال عنوان الكنيسة</string>
   <string name="add_home_address_msg">يجب ادخال عنوان المنزل</string>
+  <string name="adding_address_successfully">تمت اضافة العنوان</string>
     <string name="church_address_line_key">churchAddressLine</string>
     <string name="home_address_line_key">homeAddressLine</string>
     <string name="home_name_field_err">برجاء ادخال اسم المنزل</string>
@@ -243,7 +244,7 @@
   <string name="home_families_label">الاسر</string>
   <string name="family_members_label">افراد الأسرة</string>
   <string name="add_family_label">اضف اسرة</string>
-  <string name="add_member_label">اضف شخصا للأسرة</string>
+  <string name="add_member_label">اضف فرد للأسرة</string>
   <string name="homesListKey">homesList</string>
   <string name="home_index_key">homeIndex</string>
     <string name="home_key">home</string>
@@ -286,7 +287,8 @@
   <string name="phone_num_label">رقم الموبايل</string>
     <string name="sign_in_successfully_message">تم الدخول بنجاح</string>
     <string name="search_err_message">ادخل كلمة البحث</string>
-  <string name="family_label">عائلة</string>
+  <string name="family_label">أسرة</string>
+  <string name="family_label2">اسرة</string>
   <string name="home_label">منزل</string>
 
 

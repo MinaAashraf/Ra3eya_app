@@ -15,8 +15,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/screen_margin"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/screen_margin"
+            android:id="@+id/parent_layout"
             tools:context=".presentation.signin.SignInFragment">
 
             <ImageView
@@ -34,11 +35,12 @@
                 android:id="@+id/church_name_field"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_40sdp"
                 app:helperTextEnabled="true"
                 app:helperTextTextColor="@color/red"
                 android:focusable="false"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/church_icon">
@@ -50,7 +52,7 @@
                     android:focusable="false"
                     android:inputType="textPersonName"
                     android:id="@+id/churchName_auto_complete_tv"
-                    android:textSize="@dimen/font_lg"
+                    android:textSize="@dimen/font_md"
                     android:textStyle="bold" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -60,20 +62,23 @@
                 android:id="@+id/password_field"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 app:helperTextEnabled="true"
                 app:helperTextTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layoutDirection="rtl"
                 app:layout_constraintTop_toBottomOf="@id/church_name_field">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_label"
+                    android:textDirection="rtl"
+                    android:gravity="right"
                     android:inputType="textPassword"
-                    android:textSize="@dimen/font_lg"
+                    android:textSize="@dimen/font_md"
                     android:textStyle="bold" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -95,7 +100,6 @@
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/sign_in_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/sign_in_btn" />
@@ -112,7 +116,6 @@
                 android:textColor="@color/purple_500"
                 android:textSize="@dimen/font_lg"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
 

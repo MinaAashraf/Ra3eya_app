@@ -123,7 +123,7 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
             .icon(BitmapDescriptorFactory.fromResource(R.drawable.church_marker))
         gMap?.let {
             it.addMarker(churchMarker)
-            it.animateCamera(CameraUpdateFactory.newLatLngZoom(churchMarker.position, 20f))
+            it.animateCamera(CameraUpdateFactory.newLatLngZoom(churchMarker.position, 14f))
         }
 
     }
@@ -167,7 +167,7 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
                 return@setOnClickListener
             }
 
-            if (searchWord.startsWith(getString(R.string.family_label)))
+            if (searchWord.startsWith(getString(R.string.family_label))||searchWord.startsWith(getString(R.string.family_label2)))
                 findNavController().navigate(
                     R.id.action_mapFragment_to_familyDetailsFragment2,
                     Bundle().apply {

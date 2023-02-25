@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -13,6 +15,7 @@ import com.mina.dev.ra3eya_app.R
 import com.mina.dev.ra3eya_app.databinding.FragmentHomeFormBinding
 import com.mina.dev.ra3eya_app.presentation.main_screen.MapsViewModel
 import com.mina.dev.ra3eya_app.presentation.utils.hide
+import com.mina.dev.ra3eya_app.presentation.utils.hideKeyboard
 import com.mina.dev.ra3eya_app.presentation.utils.hideUsingGone
 import com.mina.dev.ra3eya_app.presentation.utils.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +44,7 @@ class HomeFormFragment : Fragment() {
             churchAddressLine = getString(getString(R.string.church_address_line_key), "")
             Log.d("churchArgs", "$churchId --- $churchAddressLine")
         }
-
+        handleSoftKeyboard()
         return binding.root
     }
 
@@ -88,7 +91,7 @@ class HomeFormFragment : Fragment() {
                     homeName = homeName,
                     homeFamiliesNo = homeFamNum,
                     churchId = churchId,
-                   // addressLine = churchAddressLine,
+                    // addressLine = churchAddressLine,
                     detailedAddress = homeDetailedAddress
                 )
                 observeModelData()
@@ -112,10 +115,10 @@ class HomeFormFragment : Fragment() {
             isValid = false
         }
         if (viewModel.home.location == null) {
-            binding.addressErrTxt.show()
+            binding.addressErrTxt.text = getString(R.string.add_home_address_msg)
             isValid = false
         } else {
-            binding.addressErrTxt.hideUsingGone()
+            binding.addressErrTxt.text = getString(R.string.adding_address_successfully)
         }
         return isValid
     }
@@ -130,6 +133,15 @@ class HomeFormFragment : Fragment() {
                     Log.d("home insertion err", it.second!!)
             }
 
+        }
+    }
+
+    private fun handleSoftKeyboard() {
+        binding.parentLayout.setOnClickListener {
+            (it as ConstraintLayout).children.forEach {
+                it.hideKeyboard()
+            }
+            // binding.memberNameField.editText!!.hideKeyboard()
         }
     }
 
